@@ -14,11 +14,11 @@ public class noeudScript : MonoBehaviour
     {
         //gameObject.SetActive(false);
     }
-    public void Create(int posX, int posZ, ref Dictionary<Vector3, GameObject> noeuds, ref Dictionary<Vector3, GameObject> liens)
+    public void Create(int posX, int posZ, ref Dictionary<Vector3, GameObject> noeuds)
     {
-        pos = new Vector3(posX, 0.5f / 8.0f, posZ);
+        pos = new Vector3(posX, 0.5f / 6.0f, posZ);
 
-        Vector3 spawnPos = 8 * pos;
+        Vector3 spawnPos = 6 * pos;
 
         gameObject.transform.position = spawnPos;
 
@@ -26,12 +26,12 @@ public class noeudScript : MonoBehaviour
         if(posX > 0)
         {
             Instantiate(lienOuest);
-            lienOuest.GetComponent<lienScript>().Create(noeuds[pos + Vector3.left], gameObject, ref liens);
+            lienOuest.GetComponent<lienScript>().Create(noeuds[pos + Vector3.left], gameObject);
         }
         if(posZ > 0)
         {
             Instantiate(lienSud);
-            lienSud.GetComponent<lienScript>().Create(noeuds[pos + Vector3.back], gameObject, ref liens);
+            lienSud.GetComponent<lienScript>().Create(noeuds[pos + Vector3.back], gameObject);
         }
     }
     // Update is called once per frame
@@ -42,5 +42,45 @@ public class noeudScript : MonoBehaviour
 
     public Vector3 getPos() {
         return pos;
+    }
+
+    public lienScript getMinWLien() {
+        int minW = int.MaxValue;
+        lienScript minWLien = null;
+
+        //S
+        if (architect.liens.ContainsKey(pos + (Vector3.back / 2))) {
+            lienScript link = architect.liens[pos + (Vector3.back / 2)].GetComponent<lienScript>();
+            if (!link.used() && (link.weight < minW)) {
+                minW = link.weight;
+                minWLien = link;
+            }
+        }
+        //N
+        if (architect.liens.ContainsKey(pos + (Vector3.forward / 2))) {
+            lienScript link = architect.liens[pos + (Vector3.forward / 2)].GetComponent<lienScript>();
+            if (!link.used() && (link.weight < minW)) {
+                minW = link.weight;
+                minWLien = link;
+            }
+        }
+        //E
+        if (architect.liens.ContainsKey(pos + (Vector3.right / 2))) {
+            lienScript link = architect.liens[pos + (Vector3.right / 2)].GetComponent<lienScript>();
+            if (!link.used() && (link.weight < minW)) {
+                minW = link.weight;
+                minWLien = link;
+            }
+        }
+        //W
+        if (architect.liens.ContainsKey(pos + (Vector3.left / 2))) {
+            lienScript link = architect.liens[pos + (Vector3.left / 2)].GetComponent<lienScript>();
+            if (!link.used() && (link.weight < minW)) {
+                minW = link.weight;
+                minWLien = link;
+            }
+        }
+
+        return minWLien;
     }
 }
