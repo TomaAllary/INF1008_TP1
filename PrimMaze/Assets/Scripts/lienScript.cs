@@ -11,29 +11,31 @@ public class lienScript : MonoBehaviour
         
     }
 
-    public void Create(Vector3 nextNoeudPos, bool vertical, GameObject noeudPrecedent, ref Dictionary<Vector3, GameObject> noeuds, ref Dictionary<Vector3, GameObject> liens)
+    public void Create(GameObject noeudSuivant, GameObject noeudPrecedent, ref Dictionary<Vector3, GameObject> liens)
     {
         this.noeudPrecedent = noeudPrecedent;
-        Vector3 pos;
-        if (vertical)
-            pos = nextNoeudPos + (Vector3.forward / 2);
-        else
-            pos = nextNoeudPos + (Vector3.right / 2);
+        this.noeudSuivant = noeudSuivant;
+        Vector3 pos = (noeudPrecedent.GetComponent<noeudScript>().getPos() + noeudSuivant.GetComponent<noeudScript>().getPos()) / 2;
 
         Vector3 spawnPos = 8 * pos;
 
         gameObject.transform.position = spawnPos;
 
+        if (pos.x % 1 == 0)
+            transform.LookAt(transform.position + Vector3.right);
+        else {
+            transform.LookAt(transform.position + Vector3.forward);
+        }
 
         liens[pos] = gameObject;
 
-        if (!noeuds.ContainsKey(nextNoeudPos)) {
+        /*if (!noeuds.ContainsKey(nextNoeudPos)) {
             Instantiate(noeudSuivant);
             noeudSuivant.GetComponent<noeudScript>().Create((int)nextNoeudPos.x, (int)nextNoeudPos.z, ref noeuds, ref liens);
         }
         else {
-
-        }
+        
+        }*/
 
 
     }

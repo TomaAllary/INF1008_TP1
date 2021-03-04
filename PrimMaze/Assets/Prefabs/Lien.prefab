@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905312556917300621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 71, y: 0.5, z: 71}
+  m_LocalPosition: {x: 48, y: 0.5, z: 44}
   m_LocalScale: {x: 5, y: 0.099999994, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -92,7 +92,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2474e429128d9c64c954bc6cbfea874b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noeudPrecedent: {fileID: 7689958993420736584, guid: 0d6cdff89c4340a438d5c176b865a052,
-    type: 3}
-  noeudSuivant: {fileID: 7689958993420736584, guid: 0d6cdff89c4340a438d5c176b865a052,
-    type: 3}
+  noeudPrecedent: {fileID: 0}
+  noeudSuivant: {fileID: 0}

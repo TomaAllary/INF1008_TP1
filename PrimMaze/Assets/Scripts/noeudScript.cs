@@ -26,12 +26,12 @@ public class noeudScript : MonoBehaviour
         if(posX > 0)
         {
             Instantiate(lienOuest);
-            lienOuest.GetComponent<lienScript>().Create(new Vector3(posX, 0.5f / 6.0f, posZ) + Vector3.left, true, gameObject, ref noeuds, ref liens);
+            lienOuest.GetComponent<lienScript>().Create(noeuds[pos + Vector3.left], gameObject, ref liens);
         }
         if(posZ > 0)
         {
             Instantiate(lienNord);
-            lienNord.GetComponent<lienScript>().Create(new Vector3(posX, 0.5f / 6.0f, posZ) + Vector3.back, false, gameObject, ref noeuds, ref liens);
+            lienNord.GetComponent<lienScript>().Create(noeuds[pos + Vector3.back], gameObject, ref liens);
         }
     }
     // Update is called once per frame
