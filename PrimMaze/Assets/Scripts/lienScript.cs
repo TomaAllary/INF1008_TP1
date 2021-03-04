@@ -14,7 +14,7 @@ public class lienScript : MonoBehaviour
     public void Create(int noeudsPrecedentsH, int noeudsSuivantsH, int noeudsPrecedentsV, int noeudsSuivantsV, bool vertical, GameObject noeudPrecedent)
     {
         this.noeudPrecedent = noeudPrecedent;
-        Vector3 spawnPos = new Vector3(6 * noeudsPrecedentsH - 1, (float)0.5, 6 * noeudsPrecedentsV - 1);
+        Vector3 spawnPos = new Vector3(6*noeudsPrecedentsH - 1, (float)0.5, 6*noeudsPrecedentsV - 1);
         gameObject.transform.position = spawnPos;
         Instantiate(noeudSuivant);
         noeudSuivant.GetComponent<noeudScript>().Create(noeudsPrecedentsH, noeudsSuivantsH, noeudsPrecedentsV, noeudsSuivantsV);
