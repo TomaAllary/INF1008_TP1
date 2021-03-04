@@ -6,6 +6,7 @@ public class lienScript : MonoBehaviour
 {
     public GameObject noeudPrecedent, noeudSuivant;
     public int weight;
+    private GameObject myself;
 
     // Start is called before the first frame update
     void Start()
@@ -13,8 +14,10 @@ public class lienScript : MonoBehaviour
         weight = Random.Range(1, 11);
     }
 
-    public void Create(GameObject noeudSuivant, GameObject noeudPrecedent)
+    public void Create(GameObject noeudSuivant, GameObject noeudPrecedent, ref GameObject clone)
     {
+        myself = clone;
+
         this.noeudPrecedent = noeudPrecedent;
         this.noeudSuivant = noeudSuivant;
         Vector3 pos = (noeudPrecedent.GetComponent<noeudScript>().getPos() + noeudSuivant.GetComponent<noeudScript>().getPos()) / 2;
@@ -48,10 +51,10 @@ public class lienScript : MonoBehaviour
     }
 
     public bool used() {
-        return !gameObject.active;
+        return !myself.activeSelf;
     }
 
     public void useLien() {
-        gameObject.SetActive(false);
+        myself.SetActive(false);
     }
 }

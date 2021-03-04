@@ -64,10 +64,19 @@ public class architect : MonoBehaviour
         minWeightLien.useLien();
 
 
-        if (!noeuds.ContainsKey(minWeightLien.noeudPrecedent.GetComponent<noeudScript>().getPos()))
+        if (!noeuds[minWeightLien.noeudPrecedent.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>().explored) {
             noeudsVisite.Add(noeuds[minWeightLien.noeudPrecedent.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>());
-        if (!noeuds.ContainsKey(minWeightLien.noeudSuivant.GetComponent<noeudScript>().getPos()))
+            noeuds[minWeightLien.noeudPrecedent.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>().explored = true;
+        }
+
+        if (!noeuds[minWeightLien.noeudSuivant.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>().explored) {
             noeudsVisite.Add(noeuds[minWeightLien.noeudSuivant.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>());
+            noeuds[minWeightLien.noeudSuivant.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>().explored = true;
+        }
+
+
+        if(noeudsVisite.Count < noeuds.Count)
+            CreatePrim();
 
 
     }
