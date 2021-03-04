@@ -5,7 +5,7 @@ using UnityEngine;
 public class noeudScript : MonoBehaviour
 {
     public GameObject lienOuest;
-    public GameObject lienNord;
+    public GameObject lienSud;
 
 
     private Vector3 pos;
@@ -30,8 +30,8 @@ public class noeudScript : MonoBehaviour
         }
         if(posZ > 0)
         {
-            Instantiate(lienNord);
-            lienNord.GetComponent<lienScript>().Create(noeuds[pos + Vector3.back], gameObject, ref liens);
+            Instantiate(lienSud);
+            lienSud.GetComponent<lienScript>().Create(noeuds[pos + Vector3.back], gameObject, ref liens);
         }
     }
     // Update is called once per frame
