@@ -4,34 +4,43 @@ using UnityEngine;
 
 public class noeudScript : MonoBehaviour
 {
-    public GameObject lienEst;
-    public GameObject lienSud;
-   
+    public GameObject lienOuest;
+    public GameObject lienNord;
+
+
+    private Vector3 pos;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //gameObject.SetActive(false);
     }
-    public void Create(int noeudsPrecedentsH, int noeudsSuivantsH, int noeudsPrecedentsV, int noeudsSuivantsV)
+    public void Create(int posX, int posZ, ref Dictionary<Vector3, GameObject> noeuds, ref Dictionary<Vector3, GameObject> liens)
     {
-        Vector3 spawnPos = new Vector3(6*noeudsPrecedentsH, (float)0.5, 6*noeudsPrecedentsV);
-        noeudsPrecedentsH++;
-        noeudsPrecedentsV++;
+        pos = new Vector3(posX, 0.5f / 8.0f, posZ);
+
+        Vector3 spawnPos = 8 * pos;
+
         gameObject.transform.position = spawnPos;
-        if(noeudsSuivantsH > 0)
+
+        noeuds[pos] = gameObject;
+        if(posX > 0)
         {
-            Instantiate(lienEst);
-            lienEst.GetComponent<lienScript>().Create(noeudsPrecedentsH + 1, noeudsSuivantsH -1, noeudsPrecedentsV , noeudsSuivantsV, true, gameObject);
+            Instantiate(lienOuest);
+            lienOuest.GetComponent<lienScript>().Create(new Vector3(posX, 0.5f / 6.0f, posZ) + Vector3.left, true, gameObject, ref noeuds, ref liens);
         }
-        if(noeudsSuivantsV > 0)
+        if(posZ > 0)
         {
-            Instantiate(lienSud);
-            lienSud.GetComponent<lienScript>().Create(noeudsPrecedentsH , noeudsSuivantsH , noeudsPrecedentsV + 1, noeudsSuivantsV -1, false, gameObject);
+            Instantiate(lienNord);
+            lienNord.GetComponent<lienScript>().Create(new Vector3(posX, 0.5f / 6.0f, posZ) + Vector3.back, false, gameObject, ref noeuds, ref liens);
         }
     }
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public Vector3 getPos() {
+        return pos;
     }
 }
