@@ -49,6 +49,11 @@ public class noeudScript : MonoBehaviour
         
     }
 
+    public void explore() {
+        explored = true;
+        gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+    }
+
     public Vector2Int getPos() {
         return pos;
     }
@@ -75,19 +80,23 @@ public class noeudScript : MonoBehaviour
         }
 
         //N
-        link = architect.liens[pos.x, pos.y + 1, globalScript.SUD];
-        if (link != null) {
-            if ((!link.used()) && (link.weight < minW)) {
-                minW = link.weight;
-                minWLien = link;
+        if (pos.y + 1 < architect.liens.GetLength(1)) {
+            link = architect.liens[pos.x, pos.y + 1, globalScript.SUD];
+            if (link != null) {
+                if ((!link.used()) && (link.weight < minW)) {
+                    minW = link.weight;
+                    minWLien = link;
+                }
             }
         }
         //E
-        link = architect.liens[pos.x + 1, pos.y, globalScript.OUEST];
-        if (link != null) {
-            if ((!link.used()) && (link.weight < minW)) {
-                minW = link.weight;
-                minWLien = link;
+        if (pos.x + 1 < architect.liens.GetLength(0)) {
+            link = architect.liens[pos.x + 1, pos.y, globalScript.OUEST];
+            if (link != null) {
+                if ((!link.used()) && (link.weight < minW)) {
+                    minW = link.weight;
+                    minWLien = link;
+                }
             }
         }
 

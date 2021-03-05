@@ -39,8 +39,9 @@ public class architect : MonoBehaviour
         }
 
         noeudsVisite.Add(premier.GetComponent<noeudScript>());
+        premier.GetComponent<noeudScript>().explore();
 
-        CreatePrim();
+        StartCoroutine( CreatePrim() );
 
     }
 
@@ -51,7 +52,9 @@ public class architect : MonoBehaviour
     }
 
 
-    public void CreatePrim() {
+    IEnumerator CreatePrim() {
+
+
         int minWeight = int.MaxValue;
         lienScript minWeightLien = null;
 
@@ -68,22 +71,28 @@ public class architect : MonoBehaviour
 
         Vector2Int[] noeudsToAdd = minWeightLien.useLien();
 
+        yield return new WaitForSeconds(0.8f);
+
+
         //Rendre les noeuds attacher au lien "expored"
         if (!noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y].explored) {
 
             noeudsVisite.Add(noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y]);
-            noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y].explored = true;
+            noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y].explore();
         }
 
         if (!noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y].explored) {
 
             noeudsVisite.Add(noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y]);
-            noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y].explored = true;
+            noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y].explore();
         }
 
+        yield return new WaitForSeconds(0.8f);
+
+
         //Si des noeuds ne sont pas visite -> continuer
-        if(noeudsVisite.Count < (noeuds.GetLength(0) * noeuds.GetLength(1)))
-            CreatePrim();
+        if (noeudsVisite.Count < (noeuds.GetLength(0) * noeuds.GetLength(1)))
+            StartCoroutine( CreatePrim() );
 
 
     }

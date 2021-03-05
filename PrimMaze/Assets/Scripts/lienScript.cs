@@ -13,12 +13,13 @@ public class lienScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        weight = Random.Range(1, 11);
+        
     }
 
     public void Create(noeudScript noeudSuivant, noeudScript noeudActuel, ref GameObject clone)
     {
         myself = clone;
+        weight = Random.Range(1, 11);
 
         this.noeudActuel = noeudActuel.getPos();
         this.noeudSuivant = noeudSuivant.getPos();
