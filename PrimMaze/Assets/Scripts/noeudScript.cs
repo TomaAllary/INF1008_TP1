@@ -6,6 +6,7 @@ public class noeudScript : MonoBehaviour
 {
     public GameObject lienOuest;
     public GameObject lienSud;
+
     public bool explored;
 
     private Vector2Int pos;
@@ -27,12 +28,18 @@ public class noeudScript : MonoBehaviour
         {
             Vector2Int next = pos + Vector2Int.left;
             GameObject clone = Instantiate(lienOuest);
+
+            clone.name = "Lien " + pos.ToString() + " to west";
+
             lienOuest.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this, ref clone);
         }
         if(posZ > 0)
         {
             Vector2Int next = pos + Vector2Int.down;
             GameObject clone = Instantiate(lienSud);
+
+            clone.name = "Lien " + pos.ToString() + " to south";
+
             lienSud.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this, ref clone);
         }
     }
@@ -52,28 +59,36 @@ public class noeudScript : MonoBehaviour
 
         //S
         lienScript link = architect.liens[pos.x, pos.y, globalScript.SUD];
-        if ((!link.used()) && (link.weight < minW)) {
-            minW = link.weight;
-            minWLien = link;
+        if (link != null) {
+            if ((!link.used()) && (link.weight < minW)) {
+                minW = link.weight;
+                minWLien = link;
+            }
         }
         //O
         link = architect.liens[pos.x, pos.y, globalScript.OUEST];
-        if ((!link.used()) && (link.weight < minW)) {
-            minW = link.weight;
-            minWLien = link;
+        if (link != null) {
+            if ((!link.used()) && (link.weight < minW)) {
+                minW = link.weight;
+                minWLien = link;
+            }
         }
 
         //N
         link = architect.liens[pos.x, pos.y + 1, globalScript.SUD];
-        if ((!link.used()) && (link.weight < minW)) {
-            minW = link.weight;
-            minWLien = link;
+        if (link != null) {
+            if ((!link.used()) && (link.weight < minW)) {
+                minW = link.weight;
+                minWLien = link;
+            }
         }
         //E
         link = architect.liens[pos.x + 1, pos.y, globalScript.OUEST];
-        if ((!link.used()) && (link.weight < minW)) {
-            minW = link.weight;
-            minWLien = link;
+        if (link != null) {
+            if ((!link.used()) && (link.weight < minW)) {
+                minW = link.weight;
+                minWLien = link;
+            }
         }
 
 

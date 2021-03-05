@@ -31,6 +31,8 @@ public class architect : MonoBehaviour
                 
                 GameObject temp = Instantiate(noeudPrefab);
                 temp.GetComponent<noeudScript>().Create(x, z, ref noeuds);
+
+                temp.name = "Noeud " + temp.GetComponent<noeudScript>().getPos().ToString();
                 if (premier == null)
                     premier = temp;
             }
@@ -38,7 +40,7 @@ public class architect : MonoBehaviour
 
         noeudsVisite.Add(premier.GetComponent<noeudScript>());
 
-        //CreatePrim();
+        CreatePrim();
 
     }
 
@@ -64,21 +66,19 @@ public class architect : MonoBehaviour
             }
         }
 
-        minWeightLien.useLien();
+        Vector2Int[] noeudsToAdd = minWeightLien.useLien();
 
         //Rendre les noeuds attacher au lien "expored"
-        Vector2Int noeudAVerifier = minWeightLien.noeudActuel.getPos();
-        if (!noeuds[noeudAVerifier.x, noeudAVerifier.y].explored) {
+        if (!noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y].explored) {
 
-            noeudsVisite.Add(noeuds[noeudAVerifier.x, noeudAVerifier.y]);
-            noeuds[noeudAVerifier.x, noeudAVerifier.y].explored = true;
+            noeudsVisite.Add(noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y]);
+            noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y].explored = true;
         }
 
-        noeudAVerifier = minWeightLien.noeudSuivant.getPos();
-        if (!noeuds[noeudAVerifier.x, noeudAVerifier.y].explored) {
+        if (!noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y].explored) {
 
-            noeudsVisite.Add(noeuds[noeudAVerifier.x, noeudAVerifier.y]);
-            noeuds[noeudAVerifier.x, noeudAVerifier.y].explored = true;
+            noeudsVisite.Add(noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y]);
+            noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y].explored = true;
         }
 
         //Si des noeuds ne sont pas visite -> continuer
