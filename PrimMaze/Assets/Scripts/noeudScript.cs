@@ -6,6 +6,7 @@ public class noeudScript : MonoBehaviour
 {
     public GameObject lienOuest;
     public GameObject lienSud;
+    public GameObject murExterieur;
     public bool explored;
 
     private Vector2Int pos;
@@ -38,6 +39,10 @@ public class noeudScript : MonoBehaviour
             clone.name = "Lien " + pos.ToString() + " to south";
 
             clone.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this);
+        }
+        if(posX == 0)
+        {
+            GameObject cloneWallEast = Instantiate(murExterieur, gameObject.transform.position + new Vector3(-2.5f,4,0), Quaternion.Euler(0, 90f, 0));
         }
     }
 
