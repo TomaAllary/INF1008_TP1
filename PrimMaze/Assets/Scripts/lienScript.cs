@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class lienScript : MonoBehaviour
 {
-    public GameObject noeudPrecedent, noeudSuivant;
+    public noeudScript noeudSuivant, noeudActuel;
     public int weight;
     private GameObject myself;
+
+    private Vector2Int pos;
+    private int orientation;
 
     // Start is called before the first frame update
     void Start()
@@ -14,25 +17,27 @@ public class lienScript : MonoBehaviour
         weight = Random.Range(1, 11);
     }
 
-    public void Create(GameObject noeudSuivant, GameObject noeudPrecedent, ref GameObject clone)
+    public void Create(noeudScript noeudSuivant, noeudScript noeudActuel, ref GameObject clone)
     {
         myself = clone;
 
-        this.noeudPrecedent = noeudPrecedent;
+        this.noeudActuel = noeudActuel;
         this.noeudSuivant = noeudSuivant;
-        Vector3 pos = (noeudPrecedent.GetComponent<noeudScript>().getPos() + noeudSuivant.GetComponent<noeudScript>().getPos()) / 2;
+        pos = noeudActuel.getPos();
 
-        Vector3 spawnPos = 6 * pos;
+        Vector2 spawnPos = (Vector2)(pos + noeudSuivant.getPos()) / 2.0f;
 
-        gameObject.transform.position = spawnPos;
+        gameObject.transform.position = 6.0f * new Vector3(spawnPos.x, 0.5f / 6.0f, spawnPos.y);
 
-        if (pos.x % 1 == 0)
+        int orientation = globalScript.SUD;
+        if (spawnPos.x % 1 == 0)
             transform.LookAt(transform.position + Vector3.forward);
         else {
             transform.LookAt(transform.position + Vector3.right);
+            orientation = globalScript.OUEST;
         }
 
-        architect.liens[pos] = gameObject;
+        architect.liens[pos.x, pos.y, orientation] = this;
 
         /*if (!noeuds.ContainsKey(nextNoeudPos)) {
             Instantiate(noeudSuivant);

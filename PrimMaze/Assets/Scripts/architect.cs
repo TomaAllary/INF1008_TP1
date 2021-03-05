@@ -8,21 +8,23 @@ public class architect : MonoBehaviour
     public GameObject noeudPrefab;
     private GameObject premierNoeud;
 
-    private Dictionary<Vector3, GameObject> noeuds;
+    private noeudScript[,] noeuds;
     private List<noeudScript> noeudsVisite;
-    public static Dictionary<Vector3, GameObject> liens;
+    public static lienScript[,,] liens;
 
     // Start is called before the first frame update
     void Start()
     {
-        noeudsVisite = new List<noeudScript>();
-        noeuds = new Dictionary<Vector3, GameObject>();
-        liens = new Dictionary<Vector3, GameObject>();
-        GameObject premier = null;
         //nbRangees = globalScript.NbRangees;
         //nbColonnes = globalScript.NbColonnes;
         nbRangees = 8;
         nbColonnes = 6;
+
+        noeudsVisite = new List<noeudScript>();
+        noeuds = new noeudScript[nbColonnes, nbRangees];
+        liens = new lienScript[nbColonnes, nbRangees, 2];
+        GameObject premier = null;
+        
 
         for (int z = 0; z < nbRangees; z++) {
             for (int x = 0; x < nbColonnes; x++) {
@@ -36,7 +38,7 @@ public class architect : MonoBehaviour
 
         noeudsVisite.Add(premier.GetComponent<noeudScript>());
 
-        CreatePrim();
+        //CreatePrim();
 
     }
 
@@ -51,6 +53,7 @@ public class architect : MonoBehaviour
         int minWeight = int.MaxValue;
         lienScript minWeightLien = null;
 
+        //Trouver le lien dispo avec le poids moindre parmi les noeuds visite
         foreach (noeudScript node in noeudsVisite) {
             lienScript nodeMinWeightLien = node.getMinWLien();
             if (nodeMinWeightLien != null) {
@@ -63,19 +66,23 @@ public class architect : MonoBehaviour
 
         minWeightLien.useLien();
 
+        //Rendre les noeuds attacher au lien "expored"
+        Vector2Int noeudAVerifier = minWeightLien.noeudActuel.getPos();
+        if (!noeuds[noeudAVerifier.x, noeudAVerifier.y].explored) {
 
-        if (!noeuds[minWeightLien.noeudPrecedent.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>().explored) {
-            noeudsVisite.Add(noeuds[minWeightLien.noeudPrecedent.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>());
-            noeuds[minWeightLien.noeudPrecedent.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>().explored = true;
+            noeudsVisite.Add(noeuds[noeudAVerifier.x, noeudAVerifier.y]);
+            noeuds[noeudAVerifier.x, noeudAVerifier.y].explored = true;
         }
 
-        if (!noeuds[minWeightLien.noeudSuivant.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>().explored) {
-            noeudsVisite.Add(noeuds[minWeightLien.noeudSuivant.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>());
-            noeuds[minWeightLien.noeudSuivant.GetComponent<noeudScript>().getPos()].GetComponent<noeudScript>().explored = true;
+        noeudAVerifier = minWeightLien.noeudSuivant.getPos();
+        if (!noeuds[noeudAVerifier.x, noeudAVerifier.y].explored) {
+
+            noeudsVisite.Add(noeuds[noeudAVerifier.x, noeudAVerifier.y]);
+            noeuds[noeudAVerifier.x, noeudAVerifier.y].explored = true;
         }
 
-
-        if(noeudsVisite.Count < noeuds.Count)
+        //Si des noeuds ne sont pas visite -> continuer
+        if(noeudsVisite.Count < (noeuds.GetLength(0) * noeuds.GetLength(1)))
             CreatePrim();
 
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class globalScript
 {
+    public const int SUD = 0;
+    public const int OUEST = 1;
     private static int nbRangees;
     private static int nbColonnes;
 
