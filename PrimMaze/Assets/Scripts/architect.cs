@@ -16,8 +16,8 @@ public class architect : MonoBehaviour
     {
         //nbRangees = globalScript.NbRangees;
         //nbColonnes = globalScript.NbColonnes;
-        nbRangees = 8;
-        nbColonnes = 6;
+        nbRangees = 15;
+        nbColonnes = 16;
 
         noeudsVisite = new List<noeudScript>();
         noeuds = new noeudScript[nbColonnes, nbRangees];
@@ -36,6 +36,9 @@ public class architect : MonoBehaviour
                     premier = temp;
             }
         }
+
+        noeuds[0, 0].setColor(Color.blue);
+        noeuds[nbColonnes - 1, nbRangees - 1].setColor(Color.cyan);
 
         noeudsVisite.Add(premier.GetComponent<noeudScript>());
         premier.GetComponent<noeudScript>().explore();

@@ -43,7 +43,10 @@ public class noeudScript : MonoBehaviour
 
     public void explore() {
         explored = true;
-        gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+    }
+
+    public void setColor(Color couleur) {
+        gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetColor("_Color", couleur);
     }
 
     public Vector2Int getPos() {

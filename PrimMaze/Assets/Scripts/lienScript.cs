@@ -20,7 +20,7 @@ public class lienScript : MonoBehaviour
         this.noeudSuivant = noeudSuivant.getPos();
 
         Vector2 spawnPos = (Vector2)(this.noeudActuel + this.noeudSuivant) / 2.0f;
-        gameObject.transform.position = 6.0f * new Vector3(spawnPos.x, 0.5f / 6.0f, spawnPos.y);
+        gameObject.transform.position = 6.0f * new Vector3(spawnPos.x, 2.6f / 6.0f, spawnPos.y);
 
         //Tourner l'objet dans la bonne direction
         orientation = globalScript.SUD;
