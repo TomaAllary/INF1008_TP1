@@ -31,7 +31,7 @@ public class noeudScript : MonoBehaviour
 
             clone.name = "Lien " + pos.ToString() + " to west";
 
-            lienOuest.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this, ref clone);
+            clone.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this, ref clone);
         }
         if(posZ > 0)
         {
@@ -40,7 +40,7 @@ public class noeudScript : MonoBehaviour
 
             clone.name = "Lien " + pos.ToString() + " to south";
 
-            lienSud.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this, ref clone);
+            clone.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this, ref clone);
         }
     }
     // Update is called once per frame
