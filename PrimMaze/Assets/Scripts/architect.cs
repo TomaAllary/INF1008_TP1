@@ -7,6 +7,7 @@ public class architect : MonoBehaviour
     private int nbRangees, nbColonnes;
     public GameObject noeudPrefab;
     public GameObject murExterieur;
+    public Camera miniMapCam;
 
     private noeudScript[,] noeuds;
     private List<noeudScript> noeudsVisite;
@@ -56,6 +57,14 @@ public class architect : MonoBehaviour
 
         //StartCoroutine( CreatePrim() );
         CreatePrim();
+
+
+        //Setting the miniMap
+        miniMapCam.transform.position = new Vector3(nbColonnes * 3 - 2.5f, 30, nbRangees * 3 - 2.5f);
+        if (nbRangees > nbColonnes)
+            miniMapCam.orthographicSize = nbRangees * 3;
+        else
+            miniMapCam.orthographicSize = nbColonnes * 3;
 
     }
 
