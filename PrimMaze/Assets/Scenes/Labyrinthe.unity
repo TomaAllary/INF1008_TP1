@@ -152,6 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noeudPrefab: {fileID: 7689958993420736584, guid: 0d6cdff89c4340a438d5c176b865a052,
     type: 3}
+  murExterieur: {fileID: 8132399056934399249, guid: 080b85987123074408941cb0e15fe691,
+    type: 3}
 --- !u!4 &597613227
 Transform:
   m_ObjectHideFlags: 0

@@ -40,10 +40,10 @@ public class noeudScript : MonoBehaviour
 
             clone.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this);
         }
-        if(posX == 0)
+       /* if(posX == 0)
         {
             GameObject cloneWallEast = Instantiate(murExterieur, gameObject.transform.position + new Vector3(-2.5f,4,0), Quaternion.Euler(0, 90f, 0));
-        }
+        }*/
     }
 
     public void explore() {
