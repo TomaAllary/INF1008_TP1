@@ -40,10 +40,16 @@ public class noeudScript : MonoBehaviour
 
             clone.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this);
         }
-       /* if(posX == 0)
+
+        //Removing pillars from nodes touching an exterior wall. 
+       if(posX == globalScript.NbColonnes-1)
         {
-            GameObject cloneWallEast = Instantiate(murExterieur, gameObject.transform.position + new Vector3(-2.5f,4,0), Quaternion.Euler(0, 90f, 0));
-        }*/
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        if (posZ == globalScript.NbRangees - 1)
+        {
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        }
     }
 
     public void explore() {

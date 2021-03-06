@@ -15,10 +15,9 @@ public class architect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //nbRangees = globalScript.NbRangees;
-        //nbColonnes = globalScript.NbColonnes;
-        nbRangees = 15;
-        nbColonnes = 16;
+        nbRangees = globalScript.NbRangees;
+        nbColonnes = globalScript.NbColonnes;
+      
 
         noeudsVisite = new List<noeudScript>();
         noeuds = new noeudScript[nbColonnes, nbRangees];
@@ -43,9 +42,9 @@ public class architect : MonoBehaviour
         cloneWallEast.transform.localScale =  new Vector3 (nbRangees*6, 10, 1);
         GameObject cloneWallSouth = Instantiate(murExterieur, noeuds[0, 0].transform.position + new Vector3(nbColonnes * 3 - 2.5f, 4, -2.5f), Quaternion.Euler(0, 0, 0));
         cloneWallSouth.transform.localScale = new Vector3(nbColonnes * 6, 10, 1);
-        GameObject cloneWallNorth = Instantiate(murExterieur, cloneWallSouth.transform.position + new Vector3(0, 0, nbRangees * 6), Quaternion.Euler(0, 0, 0));
+        GameObject cloneWallNorth = Instantiate(murExterieur, cloneWallSouth.transform.position + new Vector3(0, 0, nbRangees * 6 -0.5f), Quaternion.Euler(0, 0, 0));
         cloneWallNorth.transform.localScale = cloneWallSouth.transform.localScale;
-        GameObject cloneWallWest = Instantiate(murExterieur, cloneWallEast.transform.position + new Vector3(nbColonnes * 6, 0, 0), Quaternion.Euler(0,90f,0));
+        GameObject cloneWallWest = Instantiate(murExterieur, cloneWallEast.transform.position + new Vector3(nbColonnes * 6 -0.5f, 0, 0), Quaternion.Euler(0,90f,0));
         cloneWallWest.transform.localScale = cloneWallEast.transform.localScale;
 
 
