@@ -7,6 +7,7 @@ public class architect : MonoBehaviour
     private int nbRangees, nbColonnes;
     public GameObject noeudPrefab;
     public GameObject murExterieur;
+    public GameObject timmy;
     public Camera miniMapCam;
 
     private noeudScript[,] noeuds;
@@ -37,6 +38,9 @@ public class architect : MonoBehaviour
                     premier = temp;
             }
         }
+
+        //Placement de Timmy
+        Instantiate(timmy, new Vector3(noeuds[0, 0].transform.position.x, noeuds[0, 0].transform.position.y + 3, noeuds[0, 0].transform.position.z), Quaternion.Euler(0,0,0));
 
         //Génération des murs extérieurs
         GameObject cloneWallEast = Instantiate(murExterieur, noeuds[0,0].transform.position + new Vector3(-2.5f, 4, nbRangees*3-2.5f), Quaternion.Euler(0, 90f, 0));
