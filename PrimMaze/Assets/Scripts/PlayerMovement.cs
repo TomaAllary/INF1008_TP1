@@ -6,33 +6,32 @@ using UnityEngine.Audio;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float horizontalInput;
-    public float verticalInput;
-    public float speed = 4.5f;
-    public float xRange = 100.00f;
-    public float zRange = 100.00f;
     //public Animator animator;
 
-    public GameObject gameMenu, timmy;
-
+    public GameObject gameMenu;
     public bool menuActive;
+    public float speed;
 
-    //public AudioSource timmyAudio;
-    //public AudioClip timmyPas;
-
-    private Vector3 direction;
     private Rigidbody rb;
 
-    //private int tickPace;
-    
+    //Camera controls
+    public float mouseSens = 100f;
+    private float zoom = 1.0f;
+    public Transform cam;
+    private float zoomSensitivity = 16f;
+    private float initialCamDist;
+    public Transform camTarget;
+
     // Start is called before the first frame update
     void Start()
     {
+        initialCamDist = (cam.position - transform.position).magnitude;
+        cam.transform.LookAt(camTarget.position);
 
         menuActive = false;
-        timmy = GameObject.Find("Timmy");
         rb = this.GetComponent<Rigidbody>();
-        //tickPace++;
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -46,28 +45,35 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-        if (horizontalInput != 0 || verticalInput != 0)
-        {
-            //animator.SetBool("isRunning", true);
+        float mouseX = Input.GetAxis("Mouse X") * mouseSens * Time.deltaTime;
+        //float mouseY = Input.GetAxis("Mouse Y") * mouseSens * Time.deltaTime;
 
-            direction = (horizontalInput * Vector3.right + verticalInput * Vector3.forward).normalized;
-            transform.LookAt(transform.position + direction);
 
-            rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * speed);
-            /*if (tickPace == 17)
-            {
-                timmyAudio.PlayOneShot(timmyPas);
-                tickPace = 0;
-            }
-            tickPace++;*/
+        transform.Rotate(0, mouseX, 0);
 
-        }
-        /*else
-        {
-            animator.SetBool("isRunning", false);
-        }*/
+
+
+        zoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSensitivity * Time.deltaTime;
+        zoom = Mathf.Clamp(zoom, 0.5f, 4.0f);
+
+        Vector3 camDist = (cam.position - transform.position).normalized * initialCamDist * zoom;
+
+
+        cam.position = transform.position + camDist;
+
+
+
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        Vector3 move = (transform.right * x + transform.forward * z) * speed * Time.deltaTime;
+
+        rb.MovePosition(rb.position + move);
+
+
+        cam.transform.LookAt(camTarget.position);
+
+
     }
 
 
