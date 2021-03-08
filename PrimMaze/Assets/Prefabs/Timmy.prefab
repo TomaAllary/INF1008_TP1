@@ -1,5 +1,97 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2890362915612849480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6958020643146264138}
+  - component: {fileID: 3156691196718009199}
+  m_Layer: 0
+  m_Name: Spot Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6958020643146264138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2890362915612849480}
+  m_LocalRotation: {x: 0.031427525, y: -0, z: -0, w: 0.9995061}
+  m_LocalPosition: {x: -0.03000021, y: 0.52, z: 0.01999998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7135215878760219796}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 3.6020002, y: 0, z: 0}
+--- !u!108 &3156691196718009199
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2890362915612849480}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 0.9150943, g: 0.8634842, b: 0.7640174, a: 1}
+  m_Intensity: 1
+  m_Range: 30
+  m_SpotAngle: 64
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &7135215878760219802
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +104,7 @@ GameObject:
   - component: {fileID: 7135215878760219803}
   - component: {fileID: 6795068623083859273}
   - component: {fileID: 7359934319606808973}
+  - component: {fileID: 1159727423433183941}
   m_Layer: 0
   m_Name: Timmy
   m_TagString: Timmy
@@ -32,6 +125,7 @@ Transform:
   m_Children:
   - {fileID: 2052379666062426775}
   - {fileID: 1440270354438053949}
+  - {fileID: 6958020643146264138}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,12 +172,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInput: 0
   verticalInput: 0
-  speed: 4.5
+  speed: 2
   xRange: 100
   zRange: 100
   gameMenu: {fileID: 0}
   timmy: {fileID: 0}
   menuActive: 0
+--- !u!111 &1159727423433183941
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135215878760219802}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 1827226128182048838, guid: 5265d9803017c2a44b321966d2328ff8, type: 3}
+  - {fileID: 1827226128182048838, guid: 848d601a385d02249aaab5038c63aba0, type: 3}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &7287345027626609875
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +205,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1440270354438053949}
   - component: {fileID: 4884656015697639002}
-  - component: {fileID: 6690708547137595351}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -147,7 +257,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -159,14 +269,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6690708547137595351
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7287345027626609875}
-  m_Enabled: 1
 --- !u!1001 &2013457663804810620
 PrefabInstance:
   m_ObjectHideFlags: 0
