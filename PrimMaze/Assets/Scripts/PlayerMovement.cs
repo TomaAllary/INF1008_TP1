@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //public Animator animator;
+    public Animator animator;
 
     public GameObject gameMenu;
     public bool menuActive;
@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
         rb = this.GetComponent<Rigidbody>();
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        animator.SetFloat("speedMult", speed / 8.0f);
     }
 
     // Update is called once per frame
@@ -67,6 +69,11 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = (transform.right * x + transform.forward * z) * speed * Time.deltaTime;
+        if (move.magnitude > 0)
+            animator.SetBool("isRunning", true);
+        else
+            animator.SetBool("isRunning", false);
+
 
         rb.MovePosition(rb.position + move);
 

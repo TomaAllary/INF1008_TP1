@@ -43,7 +43,7 @@ public class architect : MonoBehaviour
         }
 
         //Placement de Timmy
-        Instantiate(timmy, new Vector3(noeuds[0, 0].transform.position.x, noeuds[0, 0].transform.position.y + 3, noeuds[0, 0].transform.position.z), Quaternion.Euler(0,0,0));
+        Instantiate(timmy, new Vector3(noeuds[0, 0].transform.position.x, noeuds[0, 0].transform.position.y + 0.06f, noeuds[0, 0].transform.position.z), Quaternion.Euler(0,0,0));
 
         //Génération des murs extérieurs
         GameObject cloneWallEast = Instantiate(murExterieur, noeuds[0,0].transform.position + new Vector3(-2.5f, 4, nbRangees*3-2.5f), Quaternion.Euler(0, 90f, 0));
