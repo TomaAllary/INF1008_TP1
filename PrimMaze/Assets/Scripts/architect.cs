@@ -33,6 +33,9 @@ public class architect : MonoBehaviour
                 GameObject temp = Instantiate(noeudPrefab);
                 temp.GetComponent<noeudScript>().Create(x, z, ref noeuds);
 
+                //Counter node inits
+                GameMenuManager.operationNodeInit++;
+
                 temp.name = "Noeud " + temp.GetComponent<noeudScript>().getPos().ToString();
                 if (premier == null)
                     premier = temp;
