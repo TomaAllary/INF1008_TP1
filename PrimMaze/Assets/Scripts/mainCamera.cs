@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class mainCamera : MonoBehaviour
 {
-    public Light mainLight;
+    public Shader shader;
 
-
-    private void OnPreCull()
-    {
-        mainLight.enabled = true;
-    }
-
-    private void onPostRendre()
-    {
-        mainLight.enabled = false;
+    void Start() {
+        this.GetComponent<Camera>().SetReplacementShader(shader, "");
     }
 }
