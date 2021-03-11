@@ -9,11 +9,14 @@ public class architect : MonoBehaviour
     public GameObject murExterieur;
     public GameObject timmy;
     public Camera miniMapCam;
-    public GameObject endPosition;
+    public Material endPositionMat;
+    public GameObject winLb;
    
     private noeudScript[,] noeuds;
     private List<noeudScript> noeudsVisite;
     public static lienScript[,,] liens;
+
+    private Transform timmyInstance;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +47,7 @@ public class architect : MonoBehaviour
         }
 
         //Placement de Timmy
-        Instantiate(timmy, new Vector3(noeuds[0, 0].transform.position.x, noeuds[0, 0].transform.position.y + 0.06f, noeuds[0, 0].transform.position.z), Quaternion.Euler(0,0,0));
+        timmyInstance = Instantiate(timmy, new Vector3(noeuds[0, 0].transform.position.x, noeuds[0, 0].transform.position.y + 0.06f, noeuds[0, 0].transform.position.z), Quaternion.Euler(0,0,0)).transform;
 
         //Génération des murs extérieurs
         GameObject cloneWallEast = Instantiate(murExterieur, noeuds[0,0].transform.position + new Vector3(-2.5f, 4, nbRangees*3-2.5f), Quaternion.Euler(0, 90f, 0));
@@ -57,7 +60,7 @@ public class architect : MonoBehaviour
         cloneWallWest.transform.localScale = cloneWallEast.transform.localScale;
 
 
-        Instantiate(endPosition, new Vector3(noeuds[nbColonnes - 1, nbRangees - 1].transform.position.x, noeuds[nbColonnes - 1, nbRangees - 1].transform.position.y + .5f, noeuds[nbColonnes - 1, nbRangees - 1].transform.position.z), Quaternion.Euler(0, 0, 0));
+        noeuds[nbColonnes - 1, nbRangees - 1].transform.GetChild(0).GetComponent<Renderer>().material = endPositionMat;
 
         noeudsVisite.Add(premier.GetComponent<noeudScript>());
         premier.GetComponent<noeudScript>().explore();
@@ -73,6 +76,15 @@ public class architect : MonoBehaviour
         else
             miniMapCam.orthographicSize = nbColonnes * 3;
 
+    }
+
+    private void Update() {
+        if(Mathf.Abs( timmyInstance.position.x - noeuds[nbColonnes - 1, nbRangees - 1].transform.position.x) < 2 &&
+            Mathf.Abs( timmyInstance.position.z - noeuds[nbColonnes - 1, nbRangees - 1].transform.position.z) < 2) {
+
+            //Victory
+            winLb.SetActive(true);
+        }
     }
 
     public void CreatePrim() {
