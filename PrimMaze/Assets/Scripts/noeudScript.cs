@@ -54,6 +54,9 @@ public class noeudScript : MonoBehaviour
         {
             gameObject.transform.GetChild(1).gameObject.SetActive(false);
         }
+
+        if (Random.Range(1, 20) != 10)
+            gameObject.transform.GetChild(4).gameObject.SetActive(false);
     }
 
     public void explore() {

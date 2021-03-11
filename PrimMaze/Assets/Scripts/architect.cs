@@ -9,6 +9,7 @@ public class architect : MonoBehaviour
     public GameObject murExterieur;
     public GameObject timmy;
     public Camera miniMapCam;
+    public GameObject endPosition;
 
     private noeudScript[,] noeuds;
     private List<noeudScript> noeudsVisite;
@@ -56,8 +57,7 @@ public class architect : MonoBehaviour
         cloneWallWest.transform.localScale = cloneWallEast.transform.localScale;
 
 
-        noeuds[0, 0].setColor(Color.blue);
-        noeuds[nbColonnes - 1, nbRangees - 1].setColor(Color.cyan);
+        Instantiate(endPosition, new Vector3(noeuds[nbColonnes - 1, nbRangees - 1].transform.position.x, noeuds[nbColonnes - 1, nbRangees - 1].transform.position.y + .5f, noeuds[nbColonnes - 1, nbRangees - 1].transform.position.z), Quaternion.Euler(0, 0, 0));
 
         noeudsVisite.Add(premier.GetComponent<noeudScript>());
         premier.GetComponent<noeudScript>().explore();

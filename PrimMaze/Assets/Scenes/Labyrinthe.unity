@@ -429,6 +429,8 @@ MonoBehaviour:
     type: 3}
   timmy: {fileID: 7135215878760219802, guid: b0c945fa613e07549ad27aaa6900825b, type: 3}
   miniMapCam: {fileID: 1340927737}
+  endPosition: {fileID: 8435160614384916814, guid: 0657f0f30e8a4ca418c76e3a7d867f69,
+    type: 3}
 --- !u!4 &597613227
 Transform:
   m_ObjectHideFlags: 0
@@ -1081,7 +1083,7 @@ PrefabInstance:
     - target: {fileID: 6795068623083859273, guid: b0c945fa613e07549ad27aaa6900825b,
         type: 3}
       propertyPath: m_Constraints
-      value: 126
+      value: 122
       objectReference: {fileID: 0}
     - target: {fileID: 7135215878760219796, guid: b0c945fa613e07549ad27aaa6900825b,
         type: 3}
@@ -1161,7 +1163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1854834994
 Light:
   m_ObjectHideFlags: 0
