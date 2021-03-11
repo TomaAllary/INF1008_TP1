@@ -7,10 +7,13 @@ public class lien3D : MonoBehaviour
     public Vector3Int noeudSuivant, noeudActuel;
     private noeud3D noeudSuivantScript, noeudActuelScript;
     public int weight;
-    private int orientation;
+    public int orientation;
 
     public void Create(noeud3D noeudSuivant, noeud3D noeudActuel)
     {
+        if (Random.Range(1, 10) == 5)
+            this.transform.GetChild(0).gameObject.SetActive(true);
+
         weight = Random.Range(1, 11);
 
         noeudSuivantScript = noeudSuivant;
@@ -26,14 +29,18 @@ public class lien3D : MonoBehaviour
         orientation = globalScript.SUD;
         if (spawnPos.x % 1 == 0)
             transform.LookAt(transform.position + Vector3.forward);
-        else {
+        else if(spawnPos.z % 1 == 0) {
             transform.LookAt(transform.position + Vector3.right);
             orientation = globalScript.OUEST;
         }
-        if (Random.Range(1, 10) == 5)
-            this.transform.GetChild(0).gameObject.SetActive(true);
+        else {
+            //upward link -> no visual
+            gameObject.SetActive(false);
+            orientation = globalScript.BAS;
+        }
+
         //Ajouter le lien dans le tableau
-        architect3D.liens[this.noeudActuel.x, this.noeudActuel.y, orientation] = this;
+        architect3D.liens[this.noeudActuel.x, this.noeudActuel.y, this.noeudActuel.z, orientation] = this;
     }
 
     //Retourne vrai si le lien n'est pas deja utilise et si le prochain noeud n'est pas visite
