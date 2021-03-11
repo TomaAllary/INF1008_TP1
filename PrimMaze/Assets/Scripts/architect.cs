@@ -10,7 +10,7 @@ public class architect : MonoBehaviour
     public GameObject timmy;
     public Camera miniMapCam;
     public GameObject endPosition;
-
+   
     private noeudScript[,] noeuds;
     private List<noeudScript> noeudsVisite;
     public static lienScript[,,] liens;
@@ -20,7 +20,7 @@ public class architect : MonoBehaviour
     {
         nbRangees = globalScript.NbRangees;
         nbColonnes = globalScript.NbColonnes;
-      
+
 
         noeudsVisite = new List<noeudScript>();
         noeuds = new noeudScript[nbColonnes, nbRangees];
