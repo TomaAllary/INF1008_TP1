@@ -16,9 +16,13 @@ public class TorchLight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (torchTick == 15)
+        if (torchTick == 20)
         {
-            this.GetComponentInChildren<Light>().intensity = Random.Range(0.5f, 2);
+            float intensity = Random.Range(.4f, .7f);
+            if (intensity < .45f)
+                this.GetComponentInChildren<Light>().intensity = Random.Range(.1f, .45f);
+            else
+                this.GetComponentInChildren<Light>().intensity = intensity;
             torchTick = 0;
         }
         else

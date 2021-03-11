@@ -30,7 +30,8 @@ public class lienScript : MonoBehaviour
             transform.LookAt(transform.position + Vector3.right);
             orientation = globalScript.OUEST;
         }
-
+        if (Random.Range(1, 10) == 5)
+            this.transform.GetChild(0).gameObject.SetActive(true);
         //Ajouter le lien dans le tableau
         architect.liens[this.noeudActuel.x, this.noeudActuel.y, orientation] = this;
     }

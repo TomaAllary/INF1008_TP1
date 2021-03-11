@@ -6,7 +6,7 @@ public static class globalScript
 {
     public const int SUD = 0;
     public const int OUEST = 1;
-    private static int nbRangees = 20;
+    private static int nbRangees = 10;
     private static int nbColonnes = 20;
 
     public static int NbColonnes { get => nbColonnes; set => nbColonnes = value; }
