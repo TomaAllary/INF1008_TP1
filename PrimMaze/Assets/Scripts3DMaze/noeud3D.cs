@@ -110,7 +110,7 @@ public class noeud3D : MonoBehaviour
 
 
         //N
-        if (pos.y + 1 < architect3D.liens.GetLength(1)) {
+        if (pos.z + 1 < architect3D.liens.GetLength(1)) {
             link = architect3D.liens[pos.x, pos.y, pos.z + 1, globalScript.SUD];
             if (link != null) {
                 if (link.diponible() && (link.weight < minW)) {
@@ -130,7 +130,7 @@ public class noeud3D : MonoBehaviour
             }
         }
         //Up
-        if (pos.x + 1 < architect3D.liens.GetLength(0)) {
+        if (pos.y + 1 < architect3D.liens.GetLength(0)) {
             link = architect3D.liens[pos.x, pos.y + 1, pos.z, globalScript.BAS];
             if (link != null) {
                 if (link.diponible() && (link.weight < minW)) {

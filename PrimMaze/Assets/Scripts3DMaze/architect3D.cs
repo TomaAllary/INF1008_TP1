@@ -27,8 +27,8 @@ public class architect3D : MonoBehaviour
 
 
         noeudsVisite = new List<noeud3D>();
-        noeuds = new noeud3D[nbColonnes, nbRangees, nbEtages];
-        liens = new lien3D[nbColonnes, nbRangees, nbEtages, 2];
+        noeuds = new noeud3D[nbColonnes, nbEtages, nbRangees];
+        liens = new lien3D[nbColonnes, nbEtages, nbRangees, 3];
         GameObject premier = null;
 
         for (int y = 0; y < nbEtages; y++) {
