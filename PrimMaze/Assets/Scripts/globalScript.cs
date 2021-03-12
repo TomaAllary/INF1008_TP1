@@ -7,9 +7,9 @@ public static class globalScript
     public const int SUD = 0;
     public const int OUEST = 1;
     public const int BAS = 2;
-    private static int nbRangees = 5;
-    private static int nbColonnes = 5;
-    private static int nbEtages = 3;
+    private static int nbRangees = 3;
+    private static int nbColonnes = 3;
+    private static int nbEtages = 2;
 
     public static int NbColonnes { get => nbColonnes; set => nbColonnes = value; }
     public static int NbEtages { get => nbEtages; set => nbEtages = value; }

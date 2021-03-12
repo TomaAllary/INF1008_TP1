@@ -5,8 +5,13 @@ using UnityEngine;
 public class noeud3D : MonoBehaviour
 {
     public GameObject lienPrefab;
+    public GameObject upwardLienPrefab;
     public GameObject murExterieur;
     public bool explored;
+
+    public lien3D lienSud;
+    public lien3D lienOuest;
+    public lien3D lienBas;
 
     private Vector3Int pos;
 
@@ -26,29 +31,32 @@ public class noeud3D : MonoBehaviour
         if(posX > 0)
         {
             Vector3Int next = pos + new Vector3Int(-1, 0, 0);
-            GameObject lienOuest = Instantiate(lienPrefab);
-            lienOuest.name = "Lien " + pos.ToString() + " to west";
+            GameObject lienOuestClone = Instantiate(lienPrefab);
+            lienOuestClone.name = "Lien " + pos.ToString() + " to west";
 
-            lienOuest.GetComponent<lien3D>().Create(noeuds[next.x, next.y, next.z], this);
+            lienOuestClone.GetComponent<lien3D>().Create(noeuds[next.x, next.y, next.z], this);
+            lienOuest = lienOuestClone.GetComponent<lien3D>();
 
             GameMenuManager.operationLinkInit++;
         }
         if (posY > 0) {
             Vector3Int next = pos + new Vector3Int(0, -1, 0);
-            GameObject lienBas = Instantiate(lienPrefab);
-            lienBas.name = "Lien " + pos.ToString() + " to downward";
+            GameObject lienBasClone = Instantiate(upwardLienPrefab);
+            lienBasClone.name = "Lien " + pos.ToString() + " to downward";
 
-            lienBas.GetComponent<lien3D>().Create(noeuds[next.x, next.y, next.z], this);
+            lienBasClone.GetComponent<lien3D>().Create(noeuds[next.x, next.y, next.z], this);
+            lienBas = lienBasClone.GetComponent<lien3D>();
 
             GameMenuManager.operationLinkInit++;
         }
         if (posZ > 0)
         {
             Vector3Int next = pos + new Vector3Int(0, 0, -1);
-            GameObject lienSud = Instantiate(lienPrefab);
-            lienSud.name = "Lien " + pos.ToString() + " to south";
+            GameObject lienSudClone = Instantiate(lienPrefab);
+            lienSudClone.name = "Lien " + pos.ToString() + " to south";
 
-            lienSud.GetComponent<lien3D>().Create(noeuds[next.x, next.y, next.z], this);
+            lienSudClone.GetComponent<lien3D>().Create(noeuds[next.x, next.y, next.z], this);
+            lienSud = lienSudClone.GetComponent<lien3D>();
 
             GameMenuManager.operationLinkInit++;
         }
@@ -110,7 +118,7 @@ public class noeud3D : MonoBehaviour
 
 
         //N
-        if (pos.z + 1 < architect3D.liens.GetLength(1)) {
+        if (pos.z + 1 < architect3D.liens.GetLength(2)) {
             link = architect3D.liens[pos.x, pos.y, pos.z + 1, globalScript.SUD];
             if (link != null) {
                 if (link.diponible() && (link.weight < minW)) {
@@ -130,7 +138,7 @@ public class noeud3D : MonoBehaviour
             }
         }
         //Up
-        if (pos.y + 1 < architect3D.liens.GetLength(0)) {
+        if (pos.y + 1 < architect3D.liens.GetLength(1)) {
             link = architect3D.liens[pos.x, pos.y + 1, pos.z, globalScript.BAS];
             if (link != null) {
                 if (link.diponible() && (link.weight < minW)) {

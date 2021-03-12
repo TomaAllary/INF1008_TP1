@@ -262,9 +262,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lienPrefab: {fileID: 4145021180228064880, guid: 75d8a39e268eefb40a72bf756bb20ffd,
     type: 3}
+  upwardLienPrefab: {fileID: 4092997564299520813, guid: 37c93a109ea97d94ea0f730a3c880b52,
+    type: 3}
   murExterieur: {fileID: 4145021180228064880, guid: 75d8a39e268eefb40a72bf756bb20ffd,
     type: 3}
   explored: 0
+  lienSud: {fileID: 0}
+  lienOuest: {fileID: 0}
+  lienBas: {fileID: 0}
 --- !u!1001 &1021983917601346173
 PrefabInstance:
   m_ObjectHideFlags: 0
