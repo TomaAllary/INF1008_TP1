@@ -33,11 +33,13 @@ public class lien3D : MonoBehaviour
         if(spawnPos.y % 1 != 0) {
             //upward link
             gameObject.transform.position = 6.0f * spawnPos + new Vector3(0, 6.0f, 0);
+            //Make it unvisible unless we use it
+            gameObject.SetActive(false);
 
             orientation = globalScript.BAS;
         }
         else {
-            gameObject.transform.position = 6.0f * spawnPos + new Vector3(0, 2.5f, 0);
+            gameObject.transform.position = 6.0f * spawnPos + new Vector3(0, 3.0f, 0);
 
 
             if (Random.Range(1, 10) == 5)
@@ -62,7 +64,10 @@ public class lien3D : MonoBehaviour
     }
 
     public Vector3Int[] useLien() {
-        gameObject.SetActive(false);
+        if(orientation == globalScript.BAS)
+            gameObject.SetActive(true);
+        else
+            gameObject.SetActive(false);
         used = true;
         return new Vector3Int[2] { noeudActuel, noeudSuivant };
     }
