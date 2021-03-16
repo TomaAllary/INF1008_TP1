@@ -231,8 +231,8 @@ GameObject:
   - component: {fileID: 7135215878760219796}
   - component: {fileID: 7135215878760219803}
   - component: {fileID: 6795068623083859273}
-  - component: {fileID: 7359934319606808973}
   - component: {fileID: 1159727423433183941}
+  - component: {fileID: 1921536099}
   m_Layer: 0
   m_Name: Timmy
   m_TagString: Timmy
@@ -288,25 +288,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &7359934319606808973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7135215878760219802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb428ab08b2c089409bda1c978e50170, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1783817810}
-  gameMenu: {fileID: 0}
-  menuActive: 0
-  speed: 6
-  mouseSens: 100
-  cam: {fileID: 1440270354438053949}
-  camTarget: {fileID: 1546093858820330993}
 --- !u!111 &1159727423433183941
 Animation:
   m_ObjectHideFlags: 0
@@ -324,6 +305,27 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &1921536099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135215878760219802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb8f051408c13946826684b072bf23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1783817810}
+  speed: 6
+  mouseSens: 100
+  cam: {fileID: 1440270354438053949}
+  camTarget: {fileID: 1546093858820330993}
+  canGoUp: 0
+  canGoDown: 0
+  gameMenu: {fileID: 0}
+  menuActive: 0
 --- !u!1 &7287345027626609875
 GameObject:
   m_ObjectHideFlags: 0

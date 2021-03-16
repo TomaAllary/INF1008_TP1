@@ -1,16 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
-using UnityEngine.Audio;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement3D : MonoBehaviour
 {
-
     public Animator animator;
 
-    public GameObject gameMenu;
-    public bool menuActive;
     public float speed;
 
     private Rigidbody rb;
@@ -23,9 +19,14 @@ public class PlayerMovement : MonoBehaviour
     private float initialCamDist;
     public Transform camTarget;
 
+    public bool canGoUp;
+    public bool canGoDown;
+
+    public GameObject gameMenu;
+    public bool menuActive;
+    public Vector3 logicPos;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         initialCamDist = (cam.position - transform.position).magnitude;
         cam.transform.LookAt(camTarget.position);
 
@@ -38,16 +39,53 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
 
-        
+
 
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
+        //look for down and up links
+
+        int logicPosX = (int)((transform.position.x + 1.5f) / 3.0f);
+        int logicPosY = (int)(transform.position.y / 6.0f);
+        int logicPosZ = (int)((transform.position.z + 1.5f) / 3.0f);
+        logicPos = new Vector3(logicPosX, logicPosY, logicPosZ);
+        //look for upward
+        try {
+            lien3D up = architect3D.liens[logicPosX, logicPosY + 1, logicPosZ, globalScript.BAS];
+            if (!up)
+                throw new IndexOutOfRangeException("null link");
+            canGoUp = up.isUsed();
+
+        }
+        catch (IndexOutOfRangeException e) {
+            Console.WriteLine(e.Message);
+            canGoUp = false;
+        }
+        //look for downward
+        try {
+            lien3D down = architect3D.liens[logicPosX, logicPosY, logicPosZ, globalScript.BAS];
+            if (!down)
+                throw new IndexOutOfRangeException("null link");
+            canGoDown = down.isUsed();
+
+        }
+        catch (IndexOutOfRangeException e) {
+            Console.WriteLine(e.Message);
+            canGoDown = false;
+        }
+
+        if (canGoUp && Input.GetKeyDown(KeyCode.Space)) {
+            transform.position += new Vector3(0.0f, 6.06f, 0.0f);
+        }
+        if (canGoDown && Input.GetKeyDown(KeyCode.LeftShift)) {
+            transform.position -= new Vector3(0.0f, 6.06f, 0.0f);
+        }
+
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSens * Time.deltaTime;
         //float mouseY = Input.GetAxis("Mouse Y") * mouseSens * Time.deltaTime;
 
@@ -83,6 +121,4 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
-
-
 }

@@ -63,6 +63,10 @@ public class lien3D : MonoBehaviour
         return (!used && ( !noeudActuelScript.explored || !noeudSuivantScript.explored ));
     }
 
+    public bool isUsed() {
+        return used;
+    }
+
     public Vector3Int[] useLien() {
         if(orientation == globalScript.BAS)
             gameObject.SetActive(true);
