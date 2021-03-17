@@ -14,6 +14,6 @@ public class mainCamera : MonoBehaviour
         if(timmy == null)
             timmy = GameObject.Find("Timmy(Clone)").transform;
 
-        transform.position = new Vector3(transform.position.x, timmy.position.y + 5.94f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, timmy.position.y + 6.25f, transform.position.z);
     }
 }

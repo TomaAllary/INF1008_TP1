@@ -23,7 +23,7 @@ public class architect3D : MonoBehaviour
     {
         nbRangees = globalScript.NbRangees;
         nbColonnes = globalScript.NbColonnes;
-        nbEtages = 3;
+        nbEtages = globalScript.NbEtages;
 
 
         noeudsVisite = new List<noeud3D>();
@@ -51,17 +51,17 @@ public class architect3D : MonoBehaviour
         //Placement de Timmy
         timmyInstance = Instantiate(timmy, new Vector3(noeuds[0, 0, 0].transform.position.x, noeuds[0, 0, 0].transform.position.y + 0.06f, noeuds[0, 0, 0].transform.position.z), Quaternion.Euler(0,0,0)).transform;
 
-        /*for (int etage = 0; etage < nbEtages; etage++) {
+        for (int etage = 0; etage < nbEtages; etage++) {
             //Génération des murs extérieurs
-            GameObject cloneWallEast = Instantiate(murExterieur, noeuds[0, etage, 0].transform.position + new Vector3(-2.5f, 4, nbRangees * 3 - 2.5f), Quaternion.Euler(0, 90f, 0));
-            cloneWallEast.transform.localScale = new Vector3(nbRangees * 6, 10, 1);
-            GameObject cloneWallSouth = Instantiate(murExterieur, noeuds[0, etage, 0].transform.position + new Vector3(nbColonnes * 3 - 2.5f, 4, -2.5f), Quaternion.Euler(0, 0, 0));
-            cloneWallSouth.transform.localScale = new Vector3(nbColonnes * 6, 10, 1);
+            GameObject cloneWallEast = Instantiate(murExterieur, noeuds[0, etage, 0].transform.position + new Vector3(-2.5f, 3, nbRangees * 3 - 2.5f), Quaternion.Euler(0, 90f, 0));
+            cloneWallEast.transform.localScale = new Vector3(nbRangees * 6, 6, 1);
+            GameObject cloneWallSouth = Instantiate(murExterieur, noeuds[0, etage, 0].transform.position + new Vector3(nbColonnes * 3 - 2.5f, 3, -2.5f), Quaternion.Euler(0, 0, 0));
+            cloneWallSouth.transform.localScale = new Vector3(nbColonnes * 6, 6, 1);
             GameObject cloneWallNorth = Instantiate(murExterieur, cloneWallSouth.transform.position + new Vector3(0, 0, nbRangees * 6 - 0.5f), Quaternion.Euler(0, 0, 0));
             cloneWallNorth.transform.localScale = cloneWallSouth.transform.localScale;
             GameObject cloneWallWest = Instantiate(murExterieur, cloneWallEast.transform.position + new Vector3(nbColonnes * 6 - 0.5f, 0, 0), Quaternion.Euler(0, 90f, 0));
             cloneWallWest.transform.localScale = cloneWallEast.transform.localScale;
-        }*/
+        }
 
 
         noeuds[nbColonnes - 1, nbEtages - 1, nbRangees - 1].transform.GetChild(0).GetComponent<Renderer>().material = endPositionMat;
