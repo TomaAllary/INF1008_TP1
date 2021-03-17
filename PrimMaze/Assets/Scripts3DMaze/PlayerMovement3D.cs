@@ -49,9 +49,9 @@ public class PlayerMovement3D : MonoBehaviour
     private void FixedUpdate() {
         //look for down and up links
 
-        int logicPosX = (int)((transform.position.x + 1.5f) / 3.0f);
+        int logicPosX = (int)((transform.position.x + 2.5f) / 6.0f);
         int logicPosY = (int)(transform.position.y / 6.0f);
-        int logicPosZ = (int)((transform.position.z + 1.5f) / 3.0f);
+        int logicPosZ = (int)((transform.position.z + 2.5f) / 6.0f);
         logicPos = new Vector3(logicPosX, logicPosY, logicPosZ);
         //look for upward
         try {
@@ -79,10 +79,10 @@ public class PlayerMovement3D : MonoBehaviour
         }
 
         if (canGoUp && Input.GetKeyDown(KeyCode.Space)) {
-            transform.position += new Vector3(0.0f, 6.06f, 0.0f);
+            transform.position = new Vector3(logicPosX * 6.0f, (logicPosY + 1) * 6.0f + 0.06f, logicPosZ * 6.0f);
         }
         if (canGoDown && Input.GetKeyDown(KeyCode.LeftShift)) {
-            transform.position -= new Vector3(0.0f, 6.06f, 0.0f);
+            transform.position = new Vector3(logicPosX * 6.0f, (logicPosY - 1) * 6.0f + 0.06f, logicPosZ * 6.0f);
         }
 
 
