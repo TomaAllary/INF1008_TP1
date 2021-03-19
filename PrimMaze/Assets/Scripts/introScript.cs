@@ -64,8 +64,8 @@ public class introScript : MonoBehaviour
     }
 
     public void open3DMenu() {
-        btn3dMode.color = new Color(255, 126, 0);
-        btn2dMode.color = new Color(212, 108, 7);
+        btn3dMode.color = new Color32(255, 126, 0, 255);
+        btn2dMode.color = new Color32(212, 108, 7, 255);
 
         panel3D.SetActive(true);
         panel2D.SetActive(false);
@@ -76,8 +76,8 @@ public class introScript : MonoBehaviour
     }
 
     public void open2DMenu() {
-        btn2dMode.color = new Color(255, 126, 0);
-        btn3dMode.color = new Color(212, 108, 7);
+        btn2dMode.color = new Color32(255, 126, 0, 255);
+        btn3dMode.color = new Color32(212, 108, 7, 255);
 
         panel2D.SetActive(true);
         panel3D.SetActive(false);
