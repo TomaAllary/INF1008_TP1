@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameMenuManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class GameMenuManager : MonoBehaviour
     private Text operationNbGenMazeLb;
     private Text operationNbReadMazeLb;
     private Text MazeDimsLb;
+    private Text musicBtn;
+    private GameObject ambiance;
 
     private float time;
     // Start is called before the first frame update
@@ -27,6 +30,8 @@ public class GameMenuManager : MonoBehaviour
 
         Transform panel = transform.Find("Panel");
 
+        ambiance                = GameObject.Find("Ambiance");
+        musicBtn                = panel.Find("MusicBtn").transform.GetChild(0).GetComponent<Text>();
         operationNodeInitLb     = panel.Find("operationNodeInit").GetComponent<Text>();
         operationLinkInitLb     = panel.Find("operationLinkInit").GetComponent<Text>();
         operationNbGenMazeLb    = panel.Find("operationNbGenMaze").GetComponent<Text>();
@@ -39,7 +44,10 @@ public class GameMenuManager : MonoBehaviour
         operationLinkInit = 0;
         operationNbGenMaze = 0;
         operationNbReadMaze = 0;
-}
+        if (ambiance.activeSelf != globalScript.Music)
+            toogleMusic();
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -56,11 +64,35 @@ public class GameMenuManager : MonoBehaviour
 
         if (tooglingMenu.activeSelf) {
             Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
         }
         else {
+            Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1;
             time += Time.deltaTime;
             timeLabel.text = "Time: " + time.ToString();
         }
     }
+
+
+    public void toogleMusic() {
+        ambiance.SetActive(!ambiance.activeSelf);
+        if (ambiance.activeSelf)
+            musicBtn.text = "Musique: ouverte";
+        else
+            musicBtn.text = "Musique: fermée";
+
+        globalScript.Music = ambiance.activeSelf;
+
+    }
+
+    public void restart() {
+        SceneManager.LoadScene("Labyrinthe");
+    }
+
+    public void backToMenu() {
+        SceneManager.LoadScene("Intro");
+    }
+
+
 }
