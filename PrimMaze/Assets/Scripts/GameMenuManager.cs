@@ -54,7 +54,11 @@ public class GameMenuManager : MonoBehaviour
             operationNbReadMazeLb.text  = "Nombre d'opérations pour la lecture: " + operationNbReadMaze.ToString();
         }
 
-        if (!tooglingMenu.activeSelf) {
+        if (tooglingMenu.activeSelf) {
+            Time.timeScale = 0;
+        }
+        else {
+            Time.timeScale = 1;
             time += Time.deltaTime;
             timeLabel.text = "Time: " + time.ToString();
         }

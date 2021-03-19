@@ -50,6 +50,7 @@ public class architect3D : MonoBehaviour
 
         //Placement de Timmy
         timmyInstance = Instantiate(timmy, new Vector3(noeuds[0, 0, 0].transform.position.x, noeuds[0, 0, 0].transform.position.y + 0.06f, noeuds[0, 0, 0].transform.position.z), Quaternion.Euler(0,0,0)).transform;
+        timmyInstance.name = "Timmy(Clone)";
 
         for (int etage = 0; etage < nbEtages; etage++) {
             //Génération des murs extérieurs
