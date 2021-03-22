@@ -71,7 +71,7 @@ public class architect3D : MonoBehaviour
         premier.GetComponent<noeud3D>().explore();
 
         //StartCoroutine( CreatePrim() );
-        CreatePrim();
+        CreateBacktracking(premier.GetComponent<noeud3D>());
 
 
         //Setting the miniMap
@@ -93,38 +93,35 @@ public class architect3D : MonoBehaviour
         }
     }
 
-    public void CreatePrim() {
-        int minWeight = int.MaxValue;
-        lien3D minWeightLien = null;
+    public void CreateBacktracking(noeud3D node) {
 
-        //Trouver le lien dispo avec le poids moindre parmi les noeuds visite
-        foreach (noeud3D node in noeudsVisite) {
-            lien3D nodeMinWeightLien = node.getMinWLien();
-            if (nodeMinWeightLien != null) {
-                if (nodeMinWeightLien.weight < minWeight) {
-                    minWeight = nodeMinWeightLien.weight;
-                    minWeightLien = nodeMinWeightLien;
-                }
+        lien3D nodeMinWeightLien = node.getMinWLien();
+        while(nodeMinWeightLien != null) {
+            Vector3Int[] noeudsToAdd = nodeMinWeightLien.useLien();
+
+
+            //Rendre les noeuds attacher au lien "expored"
+            if (!noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y, noeudsToAdd[0].z].explored) {
+
+                noeudsVisite.Add(noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y, noeudsToAdd[0].z]);
+                noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y, noeudsToAdd[0].z].explore();
+
+                CreateBacktracking(noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y, noeudsToAdd[0].z]);
             }
-        }
-        Vector3Int[] noeudsToAdd = minWeightLien.useLien();
+
+            if (!noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y, noeudsToAdd[1].z].explored) {
+
+                noeudsVisite.Add(noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y, noeudsToAdd[1].z]);
+                noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y, noeudsToAdd[1].z].explore();
 
 
-        //Rendre les noeuds attacher au lien "expored"
-        if (!noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y, noeudsToAdd[0].z].explored) {
+                CreateBacktracking(noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y, noeudsToAdd[1].z]);
+            }
 
-            noeudsVisite.Add(noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y, noeudsToAdd[0].z]);
-            noeuds[noeudsToAdd[0].x, noeudsToAdd[0].y, noeudsToAdd[0].z].explore();
-        }
 
-        if (!noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y, noeudsToAdd[1].z].explored) {
-
-            noeudsVisite.Add(noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y, noeudsToAdd[1].z]);
-            noeuds[noeudsToAdd[1].x, noeudsToAdd[1].y, noeudsToAdd[1].z].explore();
+            nodeMinWeightLien = node.getMinWLien();
         }
 
-        //Si des noeuds ne sont pas visite -> continuer
-        if (noeudsVisite.Count < (noeuds.GetLength(0) * noeuds.GetLength(1) * noeuds.GetLength(2)))
-            CreatePrim();
+
     }
 }
