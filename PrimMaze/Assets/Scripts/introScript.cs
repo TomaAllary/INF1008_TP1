@@ -8,6 +8,7 @@ public class introScript : MonoBehaviour
 {
     public GameObject panel2D, panel3D;
     public Image btn3dMode, btn2dMode;
+    public Text dropdownHint;
 
     private InputField nbRangees, nbEtages, nbColonnes;
 
@@ -84,5 +85,17 @@ public class introScript : MonoBehaviour
 
         nbRangees = panel2D.transform.Find("InputRangees").GetComponent<InputField>();
         nbColonnes = panel2D.transform.Find("InputColonnes").GetComponent<InputField>();
+    }
+
+    public void setDifficulty(Dropdown dropdown) {
+        globalScript.Difficulty = dropdown.value;
+
+        if (dropdown.value == globalScript.EASY)
+            dropdownHint.text = "- Mini-map avec Timmy -";
+        else if(dropdown.value == globalScript.NORMAL)
+            dropdownHint.text = "- Mini-map sans Timmy -";
+        else
+            dropdownHint.text = "-  Sans Mini-map, sans Timmy -";
+
     }
 }
