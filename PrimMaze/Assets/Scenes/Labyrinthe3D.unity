@@ -286,6 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 4df929d2772601c41855a3570e8ce4d0, type: 3}
   FloorLabel: {fileID: 909023276}
+  minimap: {fileID: 456562083}
 --- !u!20 &104793773
 Camera:
   m_ObjectHideFlags: 0

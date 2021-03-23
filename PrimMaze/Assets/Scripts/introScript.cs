@@ -3,16 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class introScript : MonoBehaviour
 {
     public GameObject panel2D, panel3D;
     public Image btn3dMode, btn2dMode;
     public Text dropdownHint;
+    public Dropdown dropdown;
 
     private InputField nbRangees, nbEtages, nbColonnes;
+    public InputField nameInput;
 
     private void Start() {
+        string path = Application.dataPath + "/Test.txt";
+        if (!File.Exists(path)) {
+            File.WriteAllText(path, "Test begin.... \n\n");
+        }
+        else {
+            File.AppendAllText(path, "# test fait #\n");
+        }
+        //Todo mettre le dernier nom..
+        nameInput.text = "Guest";
+
+
+        setDifficulty();
         open2DMenu();
     }
 
@@ -21,9 +36,11 @@ public class introScript : MonoBehaviour
     {
         if (panel2D.activeSelf) {
 
-            if (nbRangees.text != "" && nbColonnes.text != "") {
-                globalScript.NbRangees = int.Parse(nbRangees.text);
+            if (nbRangees.text != "" && nbColonnes.text != "" && nameInput.text != "") {
+                globalScript.NbRangees  = int.Parse(nbRangees.text);
                 globalScript.NbColonnes = int.Parse(nbColonnes.text);
+                globalScript.Username   = nameInput.text;
+
                 SceneManager.LoadScene("Labyrinthe");
             }
             else {
@@ -36,13 +53,20 @@ public class introScript : MonoBehaviour
                     nbColonnes.image.color = Color.red;
                 else
                     nbColonnes.image.color = Color.white;
+
+                if (nameInput.text == "")
+                    nameInput.image.color = Color.red;
+                else
+                    nameInput.image.color = Color.white;
             }
         }
         else {
-            if (nbRangees.text != "" && nbEtages.text != "" && nbColonnes.text != "") {
-                globalScript.NbRangees = int.Parse(nbRangees.text);
-                globalScript.NbEtages = int.Parse(nbEtages.text);
+            if (nbRangees.text != "" && nbEtages.text != "" && nbColonnes.text != "" && nameInput.text != "") {
+                globalScript.NbRangees  = int.Parse(nbRangees.text);
+                globalScript.NbEtages   = int.Parse(nbEtages.text);
                 globalScript.NbColonnes = int.Parse(nbColonnes.text);
+                globalScript.Username   = nameInput.text;
+
                 SceneManager.LoadScene("Labyrinthe3D");
             }
             else {
@@ -60,6 +84,11 @@ public class introScript : MonoBehaviour
                     nbColonnes.image.color = Color.red;
                 else
                     nbColonnes.image.color = Color.white;
+
+                if (nameInput.text == "")
+                    nameInput.image.color = Color.red;
+                else
+                    nameInput.image.color = Color.white;
             }
         }
     }
@@ -87,7 +116,7 @@ public class introScript : MonoBehaviour
         nbColonnes = panel2D.transform.Find("InputColonnes").GetComponent<InputField>();
     }
 
-    public void setDifficulty(Dropdown dropdown) {
+    public void setDifficulty() {
         globalScript.Difficulty = dropdown.value;
 
         if (dropdown.value == globalScript.EASY)
@@ -95,7 +124,7 @@ public class introScript : MonoBehaviour
         else if(dropdown.value == globalScript.NORMAL)
             dropdownHint.text = "- Mini-map sans Timmy -";
         else
-            dropdownHint.text = "-  Sans Mini-map, sans Timmy -";
+            dropdownHint.text = "-  Sans Mini-map -";
 
     }
 }

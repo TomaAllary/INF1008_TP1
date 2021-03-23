@@ -463,7 +463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &582879914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1423,6 +1423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 4df929d2772601c41855a3570e8ce4d0, type: 3}
   FloorLabel: {fileID: 1623439794}
+  minimap: {fileID: 1560090528}
 --- !u!20 &1340927737
 Camera:
   m_ObjectHideFlags: 0

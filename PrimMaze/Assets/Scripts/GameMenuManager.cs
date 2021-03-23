@@ -26,6 +26,10 @@ public class GameMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //if(globalScript.Difficulty == globalScript.NORMAL)
+
+
+
         time = 0.0f;
 
         Transform panel = transform.Find("Panel");

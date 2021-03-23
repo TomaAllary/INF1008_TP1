@@ -15,6 +15,7 @@ public static class globalScript
     private static int nbRangees = 3;
     private static int nbColonnes = 3;
     private static int nbEtages = 5;
+    private static string username = "guest";
     private static bool musicOn = true;
     private static int difficulty = EASY;
 
@@ -23,4 +24,5 @@ public static class globalScript
     public static int NbRangees { get => nbRangees; set => nbRangees = value; }
     public static bool Music { get => musicOn; set => musicOn = value; }
     public static int Difficulty { get => difficulty; set => difficulty = value; }
+    public static string Username { get => username; set => username = value; }
 }
