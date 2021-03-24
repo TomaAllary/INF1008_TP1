@@ -24,7 +24,9 @@ public class introScript : MonoBehaviour
             File.AppendAllText(path, "# test fait #\n");
         }
         //Todo mettre le dernier nom..
-        nameInput.text = "Guest";
+        nameInput.text = globalScript.Username;
+        if (nameInput.text == "")
+            nameInput.text = "Guest";
 
 
         setDifficulty();
@@ -41,6 +43,7 @@ public class introScript : MonoBehaviour
                 globalScript.NbColonnes = int.Parse(nbColonnes.text);
                 globalScript.Username   = nameInput.text;
 
+                globalScript.NbOperations = 0;
                 SceneManager.LoadScene("Labyrinthe");
             }
             else {
@@ -67,6 +70,7 @@ public class introScript : MonoBehaviour
                 globalScript.NbColonnes = int.Parse(nbColonnes.text);
                 globalScript.Username   = nameInput.text;
 
+                globalScript.NbOperations = 0;
                 SceneManager.LoadScene("Labyrinthe3D");
             }
             else {
@@ -108,6 +112,9 @@ public class introScript : MonoBehaviour
         nbRangees = panel3D.transform.Find("InputRangees").GetComponent<InputField>();
         nbEtages = panel3D.transform.Find("InputEtages").GetComponent<InputField>();
         nbColonnes = panel3D.transform.Find("InputColonnes").GetComponent<InputField>();
+        nbRangees.text = globalScript.NbRangees.ToString();
+        nbEtages.text = globalScript.NbRangees.ToString();
+        nbColonnes.text = globalScript.NbRangees.ToString();
     }
 
     public void open2DMenu() {
@@ -119,6 +126,8 @@ public class introScript : MonoBehaviour
 
         nbRangees = panel2D.transform.Find("InputRangees").GetComponent<InputField>();
         nbColonnes = panel2D.transform.Find("InputColonnes").GetComponent<InputField>();
+        nbRangees.text = globalScript.NbRangees.ToString();
+        nbColonnes.text = globalScript.NbRangees.ToString();
     }
 
     public void setDifficulty() {
@@ -131,5 +140,15 @@ public class introScript : MonoBehaviour
         else
             dropdownHint.text = "-  Sans Mini-map -";
 
+    }
+
+    public void quickLaunch(string dim) {
+        string[] dims = dim.Split('x');
+        globalScript.NbColonnes = int.Parse(dims[0]);
+        globalScript.NbRangees = int.Parse(dims[1]);
+        globalScript.Username = "Guest";
+
+        globalScript.NbOperations = 0;
+        SceneManager.LoadScene("Labyrinthe");
     }
 }
