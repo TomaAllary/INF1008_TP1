@@ -38,9 +38,6 @@ public class architect : MonoBehaviour
                 GameObject temp = Instantiate(noeudPrefab);
                 temp.GetComponent<noeudScript>().Create(x, z, ref noeuds);
 
-                //Counter node inits
-                GameMenuManager.operationNodeInit++;
-
                 temp.name = "Noeud " + temp.GetComponent<noeudScript>().getPos().ToString();
                 if (premier == null)
                     premier = temp;
@@ -67,9 +64,7 @@ public class architect : MonoBehaviour
         noeudsVisite.Add(premier.GetComponent<noeudScript>());
         premier.GetComponent<noeudScript>().explore();
 
-        //StartCoroutine( CreatePrim() );
         CreatePrim();
-
 
         //Setting the miniMap
         miniMapCam.transform.position = new Vector3(nbColonnes * 3 - 2.5f, 30, nbRangees * 3 - 2.5f);
@@ -130,12 +125,7 @@ public class architect : MonoBehaviour
             if (n == 25 || n == 50 || n == 100 || n == 400 || n == 1000 || n == 10000)
             {
                 string path = Application.dataPath + "/Stats_For_N_Equals_" + n.ToString() + ".txt";
-                /*if (!File.Exists(path))
-                {
-                    File.WriteAllText(path, globalScript.NbOperations.ToString() + "\n");
-                }*/
-                
-                    File.AppendAllText(path, globalScript.NbOperations.ToString() + "\n");
+                File.AppendAllText(path, globalScript.NbOperations.ToString() + "\n");
                 
             }
         }

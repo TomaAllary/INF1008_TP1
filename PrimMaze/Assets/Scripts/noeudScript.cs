@@ -31,8 +31,6 @@ public class noeudScript : MonoBehaviour
             clone.name = "Lien " + pos.ToString() + " to west";
 
             clone.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this);
-
-            GameMenuManager.operationLinkInit++;
         }
         if(posZ > 0)
         {
@@ -41,8 +39,6 @@ public class noeudScript : MonoBehaviour
             clone.name = "Lien " + pos.ToString() + " to south";
 
             clone.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this);
-
-            GameMenuManager.operationLinkInit++;
         }
 
         //Removing pillars from nodes touching an exterior wall. 

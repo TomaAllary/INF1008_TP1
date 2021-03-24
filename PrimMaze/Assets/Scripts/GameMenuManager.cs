@@ -6,51 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class GameMenuManager : MonoBehaviour
 {
-    public static int operationNodeInit;
-    public static int operationLinkInit;
-    public static int operationNbGenMaze;
-    public static int operationNbReadMaze;
-
     public GameObject tooglingMenu;
     public Text timeLabel;
+    public Slider volumeSlider;
+    public Slider mapSizeSlider;
+    public RectTransform minimap;
 
-    private Text operationNodeInitLb;
-    private Text operationLinkInitLb;
-    private Text operationNbGenMazeLb;
-    private Text operationNbReadMazeLb;
     private Text MazeDimsLb;
-    private Text musicBtn;
-    private GameObject ambiance;
+    private AudioSource ambiance;
 
     private float time;
     // Start is called before the first frame update
     void Start()
     {
-        //if(globalScript.Difficulty == globalScript.NORMAL)
-
-
-
         time = 0.0f;
-
         Transform panel = transform.Find("Panel");
 
-        ambiance                = GameObject.Find("Ambiance");
-        musicBtn                = panel.Find("MusicBtn").transform.GetChild(0).GetComponent<Text>();
-        operationNodeInitLb     = panel.Find("operationNodeInit").GetComponent<Text>();
-        operationLinkInitLb     = panel.Find("operationLinkInit").GetComponent<Text>();
-        operationNbGenMazeLb    = panel.Find("operationNbGenMaze").GetComponent<Text>();
-        operationNbReadMazeLb   = panel.Find("operationNbReadMaze").GetComponent<Text>();
-        MazeDimsLb              = panel.Find("MazeDims").GetComponent<Text>();
+        ambiance                = GameObject.Find("Ambiance").transform.GetChild(0).GetComponent<AudioSource>();
+        volumeSlider.value = ambiance.volume = globalScript.MusicVolume;
+        mapSizeSlider.value = globalScript.MinimapSize;
+        sizeMinimap();
 
+        MazeDimsLb = panel.Find("MazeDims").GetComponent<Text>();
         MazeDimsLb.text = "Largeur: " + globalScript.NbColonnes.ToString() + " Hauteur: " + globalScript.NbRangees.ToString();
-
-        operationNodeInit = 0 ;
-        operationLinkInit = 0;
-        operationNbGenMaze = 0;
-        operationNbReadMaze = 0;
-        if (ambiance.activeSelf != globalScript.Music)
-            toogleMusic();
-
     }
 
     // Update is called once per frame
@@ -58,12 +36,6 @@ public class GameMenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             tooglingMenu.SetActive(!tooglingMenu.activeSelf);
-
-            //Refresh values
-            operationNodeInitLb.text    = "Nombre de noeud initialisés: " + operationNodeInit.ToString();
-            operationLinkInitLb.text    = "Nombre de liens initialisés: " + operationLinkInit.ToString();
-            operationNbGenMazeLb.text   = "Nombre d'opérations pour la génération: " + operationNbGenMaze.ToString();
-            operationNbReadMazeLb.text  = "Nombre d'opérations pour la lecture: " + operationNbReadMaze.ToString();
         }
 
         if (tooglingMenu.activeSelf) {
@@ -80,15 +52,16 @@ public class GameMenuManager : MonoBehaviour
 
 
     public void toogleMusic() {
-        ambiance.SetActive(!ambiance.activeSelf);
-        if (ambiance.activeSelf)
-            musicBtn.text = "Musique: ouverte";
-        else
-            musicBtn.text = "Musique: fermée";
-
-        globalScript.Music = ambiance.activeSelf;
-
+        ambiance.volume = volumeSlider.value;
+        globalScript.MusicVolume = volumeSlider.value;
     }
+    public void sizeMinimap() {
+        minimap.localScale = Vector3.one * mapSizeSlider.value;
+        minimap.anchoredPosition = new Vector2(-96.5f * mapSizeSlider.value, -95f * mapSizeSlider.value);
+
+        globalScript.MinimapSize = mapSizeSlider.value;
+    }
+
 
     public void restart() {
         SceneManager.LoadScene("Labyrinthe");

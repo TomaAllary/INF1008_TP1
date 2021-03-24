@@ -13,24 +13,21 @@ public class introScript : MonoBehaviour
     public Dropdown dropdown;
 
     private InputField nbRangees, nbEtages, nbColonnes;
+    private string settingsPath;
+ 
     public InputField nameInput;
 
     private void Start() {
-        string path = Application.dataPath + "/Test.txt";
-        if (!File.Exists(path)) {
-            File.WriteAllText(path, "Test begin.... \n\n");
+        settingsPath = Application.dataPath + "/PlayerSettings.txt";
+
+        if (globalScript.ApplicationJustStarted) {
+            InitSettings();     //Init saved user's settings
+            globalScript.ApplicationJustStarted = false;
         }
-        else {
-            File.AppendAllText(path, "# test fait #\n");
-        }
-        //Todo mettre le dernier nom..
+        setDifficulty();    //set default difficulty
+        open2DMenu();       //open 2d menu by default
+
         nameInput.text = globalScript.Username;
-        if (nameInput.text == "")
-            nameInput.text = "Guest";
-
-
-        setDifficulty();
-        open2DMenu();
     }
 
     //On passe les valeurs de rangées et de colonnes en variable globale pour permettre à la prochaine scene de les recevoir, et on lance la scène
@@ -146,9 +143,30 @@ public class introScript : MonoBehaviour
         string[] dims = dim.Split('x');
         globalScript.NbColonnes = int.Parse(dims[0]);
         globalScript.NbRangees = int.Parse(dims[1]);
-        globalScript.Username = "Guest";
 
         globalScript.NbOperations = 0;
         SceneManager.LoadScene("Labyrinthe");
+    }
+
+    public void Quit() {
+        Application.Quit();
+    }
+
+    private void OnApplicationQuit() {
+        string settings = globalScript.Username + "\n" +
+                    globalScript.MusicVolume.ToString() + "\n" +
+                    globalScript.MinimapSize.ToString();
+
+        File.WriteAllText(settingsPath, settings);
+    }
+
+    private void InitSettings() {
+        if (File.Exists(settingsPath)) {
+            string[] userSetting = File.ReadAllLines(settingsPath);
+            globalScript.Username = userSetting[0];
+            globalScript.MusicVolume = float.Parse(userSetting[1]);
+            globalScript.MinimapSize = float.Parse(userSetting[2]);
+
+        }
     }
 }

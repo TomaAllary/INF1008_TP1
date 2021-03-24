@@ -36,8 +36,6 @@ public class noeud3D : MonoBehaviour
 
             lienOuestClone.GetComponent<lien3D>().Create(noeuds[next.x, next.y, next.z], this);
             lienOuest = lienOuestClone.GetComponent<lien3D>();
-
-            GameMenuManager.operationLinkInit++;
         }
         if (posY > 0) {
             Vector3Int next = pos + new Vector3Int(0, -1, 0);
@@ -46,8 +44,6 @@ public class noeud3D : MonoBehaviour
 
             lienBasClone.GetComponent<lien3D>().Create(noeuds[next.x, next.y, next.z], this);
             lienBas = lienBasClone.GetComponent<lien3D>();
-
-            GameMenuManager.operationLinkInit++;
         }
         if (posZ > 0)
         {
@@ -57,8 +53,6 @@ public class noeud3D : MonoBehaviour
 
             lienSudClone.GetComponent<lien3D>().Create(noeuds[next.x, next.y, next.z], this);
             lienSud = lienSudClone.GetComponent<lien3D>();
-
-            GameMenuManager.operationLinkInit++;
         }
 
         //Removing pillars from nodes touching an exterior wall. 
