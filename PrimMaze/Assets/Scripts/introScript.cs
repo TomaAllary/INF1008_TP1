@@ -93,6 +93,11 @@ public class introScript : MonoBehaviour
         }
     }
 
+    public void loadStats()
+    {
+        SceneManager.LoadScene("Stats");
+    }
+
     public void open3DMenu() {
         btn3dMode.color = new Color32(255, 126, 0, 255);
         btn2dMode.color = new Color32(212, 108, 7, 255);

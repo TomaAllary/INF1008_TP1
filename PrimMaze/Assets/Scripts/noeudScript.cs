@@ -79,6 +79,7 @@ public class noeudScript : MonoBehaviour
         lienScript link = architect.liens[pos.x, pos.y, globalScript.SUD];
         if (link != null) {
             if (link.diponible() && (link.weight < minW)) {
+                globalScript.NbOperations++;
                 minW = link.weight;
                 minWLien = link;
             }
@@ -87,6 +88,7 @@ public class noeudScript : MonoBehaviour
         link = architect.liens[pos.x, pos.y, globalScript.OUEST];
         if (link != null) {
             if (link.diponible() && (link.weight < minW)) {
+                globalScript.NbOperations++;
                 minW = link.weight;
                 minWLien = link;
             }
@@ -97,6 +99,7 @@ public class noeudScript : MonoBehaviour
             link = architect.liens[pos.x, pos.y + 1, globalScript.SUD];
             if (link != null) {
                 if (link.diponible() && (link.weight < minW)) {
+                    globalScript.NbOperations++;
                     minW = link.weight;
                     minWLien = link;
                 }
@@ -107,6 +110,7 @@ public class noeudScript : MonoBehaviour
             link = architect.liens[pos.x + 1, pos.y, globalScript.OUEST];
             if (link != null) {
                 if (link.diponible() && (link.weight < minW)) {
+                    globalScript.NbOperations++;
                     minW = link.weight;
                     minWLien = link;
                 }

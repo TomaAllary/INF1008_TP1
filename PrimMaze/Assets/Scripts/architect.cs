@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class architect : MonoBehaviour
@@ -91,6 +92,7 @@ public class architect : MonoBehaviour
     public void CreatePrim() {
         int minWeight = int.MaxValue;
         lienScript minWeightLien = null;
+      
 
         //Trouver le lien dispo avec le poids moindre parmi les noeuds visite
         foreach (noeudScript node in noeudsVisite) {
@@ -101,6 +103,7 @@ public class architect : MonoBehaviour
                     minWeightLien = nodeMinWeightLien;
                 }
             }
+            globalScript.NbOperations++;
         }
         Vector2Int[] noeudsToAdd = minWeightLien.useLien();
 
@@ -121,5 +124,22 @@ public class architect : MonoBehaviour
         //Si des noeuds ne sont pas visite -> continuer
         if (noeudsVisite.Count < (noeuds.GetLength(0) * noeuds.GetLength(1)))
             CreatePrim();
+        else
+        {           
+            int n = globalScript.NbColonnes * globalScript.NbRangees;
+            if (n == 25 || n == 50 || n == 100 || n == 400 || n == 1000 || n == 10000)
+            {
+                string path = Application.dataPath + "/Stats_For_N_Equals_" + n.ToString() + ".txt";
+                /*if (!File.Exists(path))
+                {
+                    File.WriteAllText(path, globalScript.NbOperations.ToString() + "\n");
+                }*/
+                
+                    File.AppendAllText(path, globalScript.NbOperations.ToString() + "\n");
+                
+            }
+        }
+
     }
+    
 }
