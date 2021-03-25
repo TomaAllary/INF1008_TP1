@@ -191,6 +191,10 @@ public class introScript : MonoBehaviour
     public void downloadMoreRam()
     {
         Application.OpenURL("https://downloadmoreram.com/");
+        for (int i = 2; i < 10; i++)
+        {
+            dmrButton.transform.GetChild(i).gameObject.SetActive(false);
+        }
         dmrButton.SetActive(false);
     }
 
