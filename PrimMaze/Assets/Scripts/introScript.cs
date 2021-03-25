@@ -11,9 +11,12 @@ public class introScript : MonoBehaviour
     public Image btn3dMode, btn2dMode;
     public Text dropdownHint;
     public Dropdown dropdown;
+    public GameObject dmrButton;
 
     private InputField nbRangees, nbEtages, nbColonnes;
     private string settingsPath;
+    private int clock;
+    private int incrementeur;
  
     public InputField nameInput;
 
@@ -28,6 +31,21 @@ public class introScript : MonoBehaviour
         open2DMenu();       //open 2d menu by default
 
         nameInput.text = globalScript.Username;
+    }
+
+    private void FixedUpdate()
+    {
+        if (dmrButton.activeSelf && incrementeur < 9)
+        {
+            clock++;
+            if(clock == 30)
+            {
+                incrementeur++;
+                clock = 0;
+                displayDmrButtonText(incrementeur);
+
+            }
+        }
     }
 
     //On passe les valeurs de rangées et de colonnes en variable globale pour permettre à la prochaine scene de les recevoir, et on lance la scène
@@ -168,5 +186,26 @@ public class introScript : MonoBehaviour
             globalScript.MinimapSize = float.Parse(userSetting[2]);
 
         }
+    }
+
+    public void downloadMoreRam()
+    {
+        Application.OpenURL("https://downloadmoreram.com/");
+        dmrButton.SetActive(false);
+    }
+
+    public void dmrButtonShow()
+    {
+        dmrButton.SetActive(true);
+        clock = 0;
+        incrementeur = 1;
+       
+    }
+
+    private void displayDmrButtonText(int textNumber)
+    {
+        //string componentName = "Text" + textNumber.ToString();
+        //(dmrButton.GetComponentInChildren(componentName) as Text).enabled = true;
+        dmrButton.transform.GetChild(textNumber).gameObject.SetActive(true);
     }
 }

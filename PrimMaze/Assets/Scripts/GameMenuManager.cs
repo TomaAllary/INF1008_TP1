@@ -64,6 +64,7 @@ public class GameMenuManager : MonoBehaviour
 
 
     public void restart() {
+        globalScript.NbOperations = 0;
         SceneManager.LoadScene("Labyrinthe");
     }
 

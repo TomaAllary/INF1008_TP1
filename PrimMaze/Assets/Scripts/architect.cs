@@ -50,9 +50,9 @@ public class architect : MonoBehaviour
 
         //Génération des murs extérieurs
         GameObject cloneWallEast = Instantiate(murExterieur, noeuds[0,0].transform.position + new Vector3(-2.5f, 2.5f, nbRangees*3-2.5f), Quaternion.Euler(0, 90f, 0));
-        cloneWallEast.transform.localScale =  new Vector3 (nbRangees*6, 6, 1);
+        cloneWallEast.transform.localScale =  new Vector3 (nbRangees*6, 15, 1);
         GameObject cloneWallSouth = Instantiate(murExterieur, noeuds[0, 0].transform.position + new Vector3(nbColonnes * 3 - 2.5f, 2.5f, -2.5f), Quaternion.Euler(0, 0, 0));
-        cloneWallSouth.transform.localScale = new Vector3(nbColonnes * 6, 6, 1);
+        cloneWallSouth.transform.localScale = new Vector3(nbColonnes * 6, 15, 1);
         GameObject cloneWallNorth = Instantiate(murExterieur, cloneWallSouth.transform.position + new Vector3(0, 0, nbRangees * 6 -0.5f), Quaternion.Euler(0, 0, 0));
         cloneWallNorth.transform.localScale = cloneWallSouth.transform.localScale;
         GameObject cloneWallWest = Instantiate(murExterieur, cloneWallEast.transform.position + new Vector3(nbColonnes * 6 -0.5f, 0, 0), Quaternion.Euler(0,90f,0));
@@ -96,6 +96,7 @@ public class architect : MonoBehaviour
                 if (nodeMinWeightLien.weight < minWeight) {
                     minWeight = nodeMinWeightLien.weight;
                     minWeightLien = nodeMinWeightLien;
+                    globalScript.NbOperations++;
                 }
             }
             globalScript.NbOperations++;
@@ -122,7 +123,7 @@ public class architect : MonoBehaviour
         else
         {           
             int n = globalScript.NbColonnes * globalScript.NbRangees;
-            if (n == 25 || n == 50 || n == 100 || n == 400 || n == 1000 || n == 10000)
+            if (n == 25 || n == 50 || n == 100 || n == 400 || n == 1000)
             {
                 string path = Application.dataPath + "/Stats_For_N_Equals_" + n.ToString() + ".txt";
                 File.AppendAllText(path, globalScript.NbOperations.ToString() + "\n");
