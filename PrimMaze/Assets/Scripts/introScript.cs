@@ -141,8 +141,8 @@ public class introScript : MonoBehaviour
 
         nbRangees = panel2D.transform.Find("InputRangees").GetComponent<InputField>();
         nbColonnes = panel2D.transform.Find("InputColonnes").GetComponent<InputField>();
-        nbRangees.text = globalScript.NbRangees.ToString();
-        nbColonnes.text = globalScript.NbRangees.ToString();
+        //nbRangees.text = globalScript.NbRangees.ToString();
+        //nbColonnes.text = globalScript.NbRangees.ToString();
     }
 
     public void setDifficulty() {
