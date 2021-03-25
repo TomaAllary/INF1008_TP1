@@ -19,6 +19,10 @@ public class introScript : MonoBehaviour
     private int incrementeur;
  
     public InputField nameInput;
+    public Button storyButton;
+    public AudioSource mainAudio, storyAudio;
+    public AudioClip audioClipStory;
+    private bool storyOn;
 
     private void Start() {
         settingsPath = Application.dataPath + "/PlayerSettings.txt";
@@ -47,6 +51,7 @@ public class introScript : MonoBehaviour
             }
         }
     }
+
 
     //On passe les valeurs de rangées et de colonnes en variable globale pour permettre à la prochaine scene de les recevoir, et on lance la scène
     public void PlayGame()
@@ -207,9 +212,33 @@ public class introScript : MonoBehaviour
     }
 
     private void displayDmrButtonText(int textNumber)
-    {
-        //string componentName = "Text" + textNumber.ToString();
-        //(dmrButton.GetComponentInChildren(componentName) as Text).enabled = true;
+    {        
         dmrButton.transform.GetChild(textNumber).gameObject.SetActive(true);
     }
+
+    public void storyButtonClick()
+    {
+        if (!storyOn)
+        {
+            mainAudio.volume = .1f;
+            storyAudio.PlayOneShot(audioClipStory);
+            storyOn = true;
+            StartCoroutine(WaitForStory());
+        }
+        else
+        {
+            storyAudio.Stop();
+            mainAudio.volume = 1f;
+            storyOn = false;
+        }
+    }
+
+    //Waits for the story audio to be done and sets the main volume to 1
+    IEnumerator WaitForStory()
+    {
+        yield return new WaitUntil(() => storyAudio.isPlaying == false);
+        mainAudio.volume = 1.0f;
+        storyOn = false;
+    }
+
 }
