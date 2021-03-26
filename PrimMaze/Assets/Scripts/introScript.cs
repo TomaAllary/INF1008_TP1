@@ -164,11 +164,19 @@ public class introScript : MonoBehaviour
 
     public void quickLaunch(string dim) {
         string[] dims = dim.Split('x');
-        globalScript.NbColonnes = int.Parse(dims[0]);
-        globalScript.NbRangees = int.Parse(dims[1]);
-
         globalScript.NbOperations = 0;
-        SceneManager.LoadScene("Labyrinthe");
+
+        if (dims.Length == 3) {
+            globalScript.NbRangees = int.Parse(dims[0]);
+            globalScript.NbEtages = int.Parse(dims[1]);
+            globalScript.NbColonnes = int.Parse(dims[2]);
+            SceneManager.LoadScene("Labyrinthe3D");
+        }
+        else {
+            globalScript.NbRangees = int.Parse(dims[0]);
+            globalScript.NbColonnes = int.Parse(dims[1]);
+            SceneManager.LoadScene("Labyrinthe");
+        }
     }
 
     public void Quit() {

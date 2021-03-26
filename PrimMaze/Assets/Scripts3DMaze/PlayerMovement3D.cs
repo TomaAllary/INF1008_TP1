@@ -7,16 +7,19 @@ public class PlayerMovement3D : MonoBehaviour
 {
     public Animator animator;
     public float speed;
+    public AudioSource runningSound;
     private Rigidbody rb;
 
     public bool canGoUp;
     public bool canGoDown;
     public Vector3 logicPos;
 
+    private float tickPace;
 
     // Start is called before the first frame update
     void Start() {
         rb = this.GetComponent<Rigidbody>();
+        tickPace = 0;
 
         Cursor.lockState = CursorLockMode.Locked;
         animator.SetFloat("speedMult", speed / 8.0f);
@@ -77,10 +80,17 @@ public class PlayerMovement3D : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = (transform.right * x + transform.forward * z) * speed * Time.deltaTime;
-        if (move.magnitude > 0)
+        if (move.magnitude > 0) {
             animator.SetBool("isRunning", true);
-        else
+            if (tickPace > 0.44) {
+                tickPace = 0;
+                runningSound.PlayOneShot(runningSound.clip);
+            }
+            tickPace += Time.deltaTime;
+        }
+        else {
             animator.SetBool("isRunning", false);
+        }
 
         rb.MovePosition(rb.position + move);
 
