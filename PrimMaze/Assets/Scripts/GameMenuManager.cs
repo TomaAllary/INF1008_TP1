@@ -65,11 +65,14 @@ public class GameMenuManager : MonoBehaviour
 
     public void restart() {
         globalScript.NbOperations = 0;
+        globalScript.NbGenration = 0;
         SceneManager.LoadScene("Labyrinthe");
     }
 
     public void backToMenu() {
         SceneManager.LoadScene("Intro");
+        globalScript.NbOperations = 0;
+        globalScript.NbGenration = 0;
     }
 
 

@@ -29,7 +29,7 @@ public class noeudScript : MonoBehaviour
             Vector2Int next = pos + Vector2Int.left;
             GameObject clone = Instantiate(lienOuest);
             clone.name = "Lien " + pos.ToString() + " to west";
-
+            globalScript.NbGenration++;
             clone.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this);
         }
         if(posZ > 0)
@@ -37,7 +37,7 @@ public class noeudScript : MonoBehaviour
             Vector2Int next = pos + Vector2Int.down;
             GameObject clone = Instantiate(lienSud);
             clone.name = "Lien " + pos.ToString() + " to south";
-
+            globalScript.NbGenration++;
             clone.GetComponent<lienScript>().Create(noeuds[next.x, next.y], this);
         }
 

@@ -36,6 +36,7 @@ public class architect : MonoBehaviour
             for (int x = 0; x < nbColonnes; x++) {
                 
                 GameObject temp = Instantiate(noeudPrefab);
+                globalScript.NbGenration++;
                 temp.GetComponent<noeudScript>().Create(x, z, ref noeuds);
 
                 temp.name = "Noeud " + temp.GetComponent<noeudScript>().getPos().ToString();
@@ -125,12 +126,10 @@ public class architect : MonoBehaviour
             int n = globalScript.NbColonnes * globalScript.NbRangees;
             if (n == 25 || n == 50 || n == 100 || n == 400 || n == 1000)
             {
+                string ligne = globalScript.NbOperations.ToString() + "," + globalScript.NbGenration.ToString();
                 string path = Application.dataPath + "/Stats_For_N_Equals_" + n.ToString() + ".txt";
-                File.AppendAllText(path, globalScript.NbOperations.ToString() + "\n");
-                
+                File.AppendAllText(path, ligne + "\n");               
             }
         }
-
-    }
-    
+    }  
 }

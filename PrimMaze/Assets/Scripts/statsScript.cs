@@ -13,12 +13,13 @@ public class statsScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string[] listeN = { "25", "50", "100", "1000", "10000" };        
+        string[] listeN = { "25", "50", "100", "1000"};        
         
         for (int i = 0; i < listeN.Length; i++)
         {
             string[] tableValeurs;
-            int moyenne = 0, n = 0;
+            int moyenneInstantiation = 0, moyenneGeneration = 0, n = 0;
+            string[] ligneSeparee;
             string path = Application.dataPath + "/Stats_For_N_Equals_" + listeN[i] + ".txt";
             if (File.Exists(path))
             {
@@ -27,7 +28,9 @@ public class statsScript : MonoBehaviour
                 {
                     try
                     {
-                        moyenne += int.Parse(line);
+                        ligneSeparee = line.Split(',');
+                        moyenneInstantiation += int.Parse(ligneSeparee[0]);
+                        moyenneGeneration += int.Parse(ligneSeparee[1]);
                     }
                     catch (FormatException)
                     {
@@ -35,14 +38,17 @@ public class statsScript : MonoBehaviour
                     }
                 }
                 n = tableValeurs.Length;
-                moyenne = (moyenne / n);
+                moyenneInstantiation = (moyenneInstantiation / n);
+                moyenneGeneration = (moyenneGeneration / n);
+               
             }
             else
             {
-                moyenne = 0;
+                moyenneGeneration = 0;
+                moyenneInstantiation = 0;
                 n = 0;
             }
-            statistiques.GetComponent<Text>().text += "pour n = " + listeN[i] + ": Moyenne de " + moyenne.ToString() + " Nombre d'essais effectués: " + n.ToString() + "\n\n";
+            statistiques.GetComponent<Text>().text += "n: " + listeN[i] + "\t\t\tMoyenne génération: "+ moyenneGeneration.ToString() + "\t\t\tMoyenne instantiation: " + moyenneInstantiation.ToString() + "\t\t\tNombre d'essais effectués: " + n.ToString() + "\n\n";
         }
     }
 
