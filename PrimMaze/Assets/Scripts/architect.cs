@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class architect : MonoBehaviour
 {
@@ -81,7 +82,9 @@ public class architect : MonoBehaviour
             Mathf.Abs( timmyInstance.position.z - noeuds[nbColonnes - 1, nbRangees - 1].transform.position.z) < 2) {
 
             //Victory
+            globalScript.gameOver = true;
             winLb.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
@@ -132,4 +135,8 @@ public class architect : MonoBehaviour
             }
         }
     }  
+
+    public void startOutro() {
+        SceneManager.LoadScene("Outro");
+    }
 }

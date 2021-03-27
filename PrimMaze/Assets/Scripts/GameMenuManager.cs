@@ -34,16 +34,19 @@ public class GameMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !globalScript.gameOver) {
             tooglingMenu.SetActive(!tooglingMenu.activeSelf);
         }
 
-        if (tooglingMenu.activeSelf) {
+        if (tooglingMenu.activeSelf || globalScript.gameOver) {
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else {
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
             Time.timeScale = 1;
             time += Time.deltaTime;
             timeLabel.text = "Time: " + time.ToString();

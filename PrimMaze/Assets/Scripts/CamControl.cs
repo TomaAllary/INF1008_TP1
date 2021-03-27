@@ -18,6 +18,7 @@ public class CamControl : MonoBehaviour
     void Start() {
         obstructions = new List<GameObject>();
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

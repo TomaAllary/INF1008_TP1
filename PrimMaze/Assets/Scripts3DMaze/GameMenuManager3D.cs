@@ -41,22 +41,24 @@ public class GameMenuManager3D : MonoBehaviour
             player = GameObject.Find("Timmy(Clone)").GetComponent<PlayerMovement3D>();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !globalScript.gameOver) {
             tooglingMenu.SetActive(!tooglingMenu.activeSelf);
         }
 
-        if (tooglingMenu.activeSelf) {
+        if (tooglingMenu.activeSelf || globalScript.gameOver) {
             upHint.SetActive(false);
             downHint.SetActive(false);
 
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else {
             upHint.SetActive(player.canGoUp);
             downHint.SetActive(player.canGoDown);
 
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             Time.timeScale = 1;
             time += Time.deltaTime;
             timeLabel.text = "Time: " + time.ToString();

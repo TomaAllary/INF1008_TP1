@@ -13,6 +13,7 @@ public static class globalScript
     public const int EASY = 0;
 
     public static bool ApplicationJustStarted = true;
+    public static bool gameOver = false;
 
     private static int nbRangees = 5;
     private static int nbColonnes = 5;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class architect3D : MonoBehaviour
 {
@@ -86,7 +87,9 @@ public class architect3D : MonoBehaviour
             Mathf.Abs(timmyInstance.position.z - noeuds[nbColonnes - 1, nbEtages - 1, nbRangees - 1].transform.position.z) < 2) {
 
             //Victory
+            globalScript.gameOver = true;
             winLb.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
@@ -120,5 +123,9 @@ public class architect3D : MonoBehaviour
         }
 
 
+    }
+
+    public void startOutro() {
+        SceneManager.LoadScene("Outro");
     }
 }
