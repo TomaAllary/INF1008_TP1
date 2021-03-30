@@ -31,6 +31,9 @@ public class introScript : MonoBehaviour
             InitSettings();     //Init saved user's settings
             globalScript.ApplicationJustStarted = false;
         }
+
+        mainAudio.volume = storyAudio.volume = globalScript.MusicVolume;
+
         setDifficulty();    //set default difficulty
         open2DMenu();       //open 2d menu by default
 
@@ -122,6 +125,10 @@ public class introScript : MonoBehaviour
         SceneManager.LoadScene("Stats");
     }
 
+    public void loadScores() {
+        SceneManager.LoadScene("HighscoresScene");
+    }
+
     public void open3DMenu() {
         btn3dMode.color = new Color32(255, 126, 0, 255);
         btn2dMode.color = new Color32(212, 108, 7, 255);
@@ -163,6 +170,8 @@ public class introScript : MonoBehaviour
     }
 
     public void quickLaunch(string dim) {
+        globalScript.Username = nameInput.text;
+
         string[] dims = dim.Split('x');
         globalScript.NbOperations = 0;
 

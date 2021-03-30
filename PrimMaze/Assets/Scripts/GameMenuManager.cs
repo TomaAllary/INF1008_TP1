@@ -78,5 +78,9 @@ public class GameMenuManager : MonoBehaviour
         globalScript.NbGenration = 0;
     }
 
+    public float getTimeElapsed() {
+        return time;
+    }
+
 
 }

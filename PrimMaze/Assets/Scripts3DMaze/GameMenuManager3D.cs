@@ -87,4 +87,8 @@ public class GameMenuManager3D : MonoBehaviour
     public void backToMenu() {
         SceneManager.LoadScene("Intro");
     }
+
+    public float getTimeElapsed() {
+        return time;
+    }
 }

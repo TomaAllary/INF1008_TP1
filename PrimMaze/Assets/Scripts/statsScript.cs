@@ -10,9 +10,12 @@ public class statsScript : MonoBehaviour
 {
 
     public Text statistiques;
+    public AudioSource music;
     // Start is called before the first frame update
     void Start()
     {
+        music.volume = globalScript.MusicVolume;
+
         string[] listeN = { "25", "50", "100", "1000"};        
         
         for (int i = 0; i < listeN.Length; i++)

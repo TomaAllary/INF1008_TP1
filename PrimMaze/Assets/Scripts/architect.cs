@@ -13,12 +13,14 @@ public class architect : MonoBehaviour
     public Camera miniMapCam;
     public Material endPositionMat;
     public GameObject winLb;
+    public GameMenuManager gameManager;
    
     private noeudScript[,] noeuds;
     private List<noeudScript> noeudsVisite;
     public static lienScript[,,] liens;
 
     private Transform timmyInstance;
+    private Highscores highscores;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,8 @@ public class architect : MonoBehaviour
         noeuds = new noeudScript[nbColonnes, nbRangees];
         liens = new lienScript[nbColonnes, nbRangees, 2];
         GameObject premier = null;
-        
+
+        readHighscore();
 
         for (int z = 0; z < nbRangees; z++) {
             for (int x = 0; x < nbColonnes; x++) {
@@ -52,9 +55,9 @@ public class architect : MonoBehaviour
 
         //Génération des murs extérieurs
         GameObject cloneWallEast = Instantiate(murExterieur, noeuds[0,0].transform.position + new Vector3(-2.5f, 2.5f, nbRangees*3-2.5f), Quaternion.Euler(0, 90f, 0));
-        cloneWallEast.transform.localScale =  new Vector3 (nbRangees*6, 15, 1);
+        cloneWallEast.transform.localScale =  new Vector3 (nbRangees*6, 6, 1);
         GameObject cloneWallSouth = Instantiate(murExterieur, noeuds[0, 0].transform.position + new Vector3(nbColonnes * 3 - 2.5f, 2.5f, -2.5f), Quaternion.Euler(0, 0, 0));
-        cloneWallSouth.transform.localScale = new Vector3(nbColonnes * 6, 15, 1);
+        cloneWallSouth.transform.localScale = new Vector3(nbColonnes * 6, 6, 1);
         GameObject cloneWallNorth = Instantiate(murExterieur, cloneWallSouth.transform.position + new Vector3(0, 0, nbRangees * 6 -0.5f), Quaternion.Euler(0, 0, 0));
         cloneWallNorth.transform.localScale = cloneWallSouth.transform.localScale;
         GameObject cloneWallWest = Instantiate(murExterieur, cloneWallEast.transform.position + new Vector3(nbColonnes * 6 -0.5f, 0, 0), Quaternion.Euler(0,90f,0));
@@ -82,6 +85,8 @@ public class architect : MonoBehaviour
             Mathf.Abs( timmyInstance.position.z - noeuds[nbColonnes - 1, nbRangees - 1].transform.position.z) < 2) {
 
             //Victory
+            writeHighscore();
+
             globalScript.gameOver = true;
             winLb.SetActive(true);
             Time.timeScale = 0;
@@ -138,5 +143,115 @@ public class architect : MonoBehaviour
 
     public void startOutro() {
         SceneManager.LoadScene("Outro");
+    }
+
+    private void writeHighscore() {
+        if (globalScript.Difficulty == globalScript.EASY) {
+            if (globalScript.NbRangees == 5 && globalScript.NbColonnes == 5) {
+                if (highscores.score5x5 > gameManager.getTimeElapsed()) {
+                    highscores.score5x5 = gameManager.getTimeElapsed();
+                    highscores.score5x5_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 5 && globalScript.NbColonnes == 10) {
+                if (highscores.score5x10 > gameManager.getTimeElapsed()) {
+                    highscores.score5x10 = gameManager.getTimeElapsed();
+                    highscores.score5x10_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 10 && globalScript.NbColonnes == 10) {
+                if (highscores.score10x10 > gameManager.getTimeElapsed()) {
+                    highscores.score10x10 = gameManager.getTimeElapsed();
+                    highscores.score10x10_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 20 && globalScript.NbColonnes == 20) {
+                if (highscores.score20x20 > gameManager.getTimeElapsed()) {
+                    highscores.score20x20 = gameManager.getTimeElapsed();
+                    highscores.score20x20_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 40 && globalScript.NbColonnes == 25) {
+                if (highscores.score40x25 > gameManager.getTimeElapsed()) {
+                    highscores.score40x25 = gameManager.getTimeElapsed();
+                    highscores.score40x25_User = globalScript.Username;
+                }
+            }
+        }else if(globalScript.Difficulty == globalScript.NORMAL) {
+            if (globalScript.NbRangees == 5 && globalScript.NbColonnes == 5) {
+                if (highscores.normalScore5x5 > gameManager.getTimeElapsed()) {
+                    highscores.normalScore5x5 = gameManager.getTimeElapsed();
+                    highscores.normalScore5x5_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 5 && globalScript.NbColonnes == 10) {
+                if (highscores.normalScore5x10 > gameManager.getTimeElapsed()) {
+                    highscores.normalScore5x10 = gameManager.getTimeElapsed();
+                    highscores.normalScore5x10_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 10 && globalScript.NbColonnes == 10) {
+                if (highscores.normalScore10x10 > gameManager.getTimeElapsed()) {
+                    highscores.normalScore10x10 = gameManager.getTimeElapsed();
+                    highscores.normalScore10x10_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 20 && globalScript.NbColonnes == 20) {
+                if (highscores.normalScore20x20 > gameManager.getTimeElapsed()) {
+                    highscores.normalScore20x20 = gameManager.getTimeElapsed();
+                    highscores.normalScore20x20_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 40 && globalScript.NbColonnes == 25) {
+                if (highscores.normalScore40x25 > gameManager.getTimeElapsed()) {
+                    highscores.normalScore40x25 = gameManager.getTimeElapsed();
+                    highscores.normalScore40x25_User = globalScript.Username;
+                }
+            }
+        }
+        else if(globalScript.Difficulty == globalScript.HARD) {
+            if (globalScript.NbRangees == 5 && globalScript.NbColonnes == 5) {
+                if (highscores.hardScore5x5 > gameManager.getTimeElapsed()) {
+                    highscores.hardScore5x5 = gameManager.getTimeElapsed();
+                    highscores.hardScore5x5_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 5 && globalScript.NbColonnes == 10) {
+                if (highscores.hardScore5x10 > gameManager.getTimeElapsed()) {
+                    highscores.hardScore5x10 = gameManager.getTimeElapsed();
+                    highscores.hardScore5x10_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 10 && globalScript.NbColonnes == 10) {
+                if (highscores.hardScore10x10 > gameManager.getTimeElapsed()) {
+                    highscores.hardScore10x10 = gameManager.getTimeElapsed();
+                    highscores.hardScore10x10_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 20 && globalScript.NbColonnes == 20) {
+                if (highscores.hardScore20x20 > gameManager.getTimeElapsed()) {
+                    highscores.hardScore20x20 = gameManager.getTimeElapsed();
+                    highscores.hardScore20x20_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 40 && globalScript.NbColonnes == 25) {
+                if (highscores.hardScore40x25 > gameManager.getTimeElapsed()) {
+                    highscores.hardScore40x25 = gameManager.getTimeElapsed();
+                    highscores.hardScore40x25_User = globalScript.Username;
+                }
+            }
+        }
+
+        File.WriteAllText(Application.dataPath + "/2dHighscores.txt", JsonUtility.ToJson(highscores));
+    }
+
+    private void readHighscore() {
+        if(File.Exists(Application.dataPath + "/2dHighscores.txt")) {
+            string json = File.ReadAllText(Application.dataPath + "/2dHighscores.txt");
+            highscores = JsonUtility.FromJson<Highscores>(json);
+        }
+        else {
+            highscores = new Highscores();
+        }
     }
 }

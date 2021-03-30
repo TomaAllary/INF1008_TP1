@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,7 +18,10 @@ public class architect3D : MonoBehaviour
     private List<noeud3D> noeudsVisite;
     public static lien3D[,,,] liens;
 
+    public GameMenuManager3D gameManager;
+
     private Transform timmyInstance;
+    private Highscores3D highscores;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +30,7 @@ public class architect3D : MonoBehaviour
         nbColonnes = globalScript.NbColonnes;
         nbEtages = globalScript.NbEtages;
 
+        readHighscore();
 
         noeudsVisite = new List<noeud3D>();
         noeuds = new noeud3D[nbColonnes, nbEtages, nbRangees];
@@ -87,6 +92,8 @@ public class architect3D : MonoBehaviour
             Mathf.Abs(timmyInstance.position.z - noeuds[nbColonnes - 1, nbEtages - 1, nbRangees - 1].transform.position.z) < 2) {
 
             //Victory
+            writeHighscore();
+
             globalScript.gameOver = true;
             winLb.SetActive(true);
             Time.timeScale = 0;
@@ -127,5 +134,98 @@ public class architect3D : MonoBehaviour
 
     public void startOutro() {
         SceneManager.LoadScene("Outro");
+    }
+
+    private void writeHighscore() {
+        if (globalScript.Difficulty == globalScript.EASY) {
+            if (globalScript.NbRangees == 5 && globalScript.NbEtages == 5 && globalScript.NbColonnes == 5) {
+                if (highscores.score5x5x5 > gameManager.getTimeElapsed()) {
+                    highscores.score5x5x5 = gameManager.getTimeElapsed();
+                    highscores.score5x5x5_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 5 && globalScript.NbEtages == 10 && globalScript.NbColonnes == 10) {
+                if (highscores.score5x10x5 > gameManager.getTimeElapsed()) {
+                    highscores.score5x10x5 = gameManager.getTimeElapsed();
+                    highscores.score5x10x5_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 10 && globalScript.NbEtages == 5 && globalScript.NbColonnes == 10) {
+                if (highscores.score10x5x10 > gameManager.getTimeElapsed()) {
+                    highscores.score10x5x10 = gameManager.getTimeElapsed();
+                    highscores.score10x5x10_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 10 && globalScript.NbEtages == 10 && globalScript.NbColonnes == 10) {
+                if (highscores.score10x10x10 > gameManager.getTimeElapsed()) {
+                    highscores.score10x10x10 = gameManager.getTimeElapsed();
+                    highscores.score10x10x10_User = globalScript.Username;
+                }
+            }
+        }
+        else if (globalScript.Difficulty == globalScript.NORMAL) {
+            if (globalScript.NbRangees == 5 && globalScript.NbEtages == 5 && globalScript.NbColonnes == 5) {
+                if (highscores.normalScore5x5x5 > gameManager.getTimeElapsed()) {
+                    highscores.normalScore5x5x5 = gameManager.getTimeElapsed();
+                    highscores.normalScore5x5x5_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 5 && globalScript.NbEtages == 10 && globalScript.NbColonnes == 10) {
+                if (highscores.normalScore5x10x5 > gameManager.getTimeElapsed()) {
+                    highscores.normalScore5x10x5 = gameManager.getTimeElapsed();
+                    highscores.normalScore5x10x5_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 10 && globalScript.NbEtages == 5 && globalScript.NbColonnes == 10) {
+                if (highscores.normalScore10x5x10 > gameManager.getTimeElapsed()) {
+                    highscores.normalScore10x5x10 = gameManager.getTimeElapsed();
+                    highscores.normalScore10x5x10_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 10 && globalScript.NbEtages == 10 && globalScript.NbColonnes == 10) {
+                if (highscores.normalScore10x10x10 > gameManager.getTimeElapsed()) {
+                    highscores.normalScore10x10x10 = gameManager.getTimeElapsed();
+                    highscores.normalScore10x10x10_User = globalScript.Username;
+                }
+            }
+        }
+        else if (globalScript.Difficulty == globalScript.HARD) {
+            if (globalScript.NbRangees == 5 && globalScript.NbEtages == 5 && globalScript.NbColonnes == 5) {
+                if (highscores.hardScore5x5x5 > gameManager.getTimeElapsed()) {
+                    highscores.hardScore5x5x5 = gameManager.getTimeElapsed();
+                    highscores.hardScore5x5x5_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 5 && globalScript.NbEtages == 10 && globalScript.NbColonnes == 10) {
+                if (highscores.hardScore5x10x5 > gameManager.getTimeElapsed()) {
+                    highscores.hardScore5x10x5 = gameManager.getTimeElapsed();
+                    highscores.hardScore5x10x5_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 10 && globalScript.NbEtages == 5 && globalScript.NbColonnes == 10) {
+                if (highscores.hardScore10x5x10 > gameManager.getTimeElapsed()) {
+                    highscores.hardScore10x5x10 = gameManager.getTimeElapsed();
+                    highscores.hardScore10x5x10_User = globalScript.Username;
+                }
+            }
+            else if (globalScript.NbRangees == 10 && globalScript.NbEtages == 10 && globalScript.NbColonnes == 10) {
+                if (highscores.hardScore10x10x10 > gameManager.getTimeElapsed()) {
+                    highscores.hardScore10x10x10 = gameManager.getTimeElapsed();
+                    highscores.hardScore10x10x10_User = globalScript.Username;
+                }
+            }
+        }
+
+        File.WriteAllText(Application.dataPath + "/3dHighscores.txt", JsonUtility.ToJson(highscores));
+    }
+
+    private void readHighscore() {
+        if (File.Exists(Application.dataPath + "/3dHighscores.txt")) {
+            string json = File.ReadAllText(Application.dataPath + "/3dHighscores.txt");
+            highscores = JsonUtility.FromJson<Highscores3D>(json);
+        }
+        else {
+            highscores = new Highscores3D();
+        }
     }
 }

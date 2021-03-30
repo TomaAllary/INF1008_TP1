@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Outro.unity
     guid: 15428f7d3a6730947ba1f5ecd8b2c33a
+  - enabled: 1
+    path: Assets/Scenes/HighscoresScene.unity
+    guid: c013f029b037a734699c4245476553e0
   m_configObjects: {}

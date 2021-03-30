@@ -795,6 +795,7 @@ MonoBehaviour:
   miniMapCam: {fileID: 1340927737}
   endPositionMat: {fileID: 2100000, guid: 613f55b31d5a3634b8f8613d792a5568, type: 2}
   winLb: {fileID: 1068153962}
+  gameManager: {fileID: 235926380}
 --- !u!4 &597613227
 Transform:
   m_ObjectHideFlags: 0
